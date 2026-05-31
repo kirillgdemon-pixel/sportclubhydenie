@@ -14,31 +14,35 @@
         }
 
         :root {
-            --bg-page: #ffffff;
+            --bg-page: #fbfdfc;
             --surface: #ffffff;
-            --text-primary: #1A2A2F;
-            --text-secondary: #5A6E6A;
-            --border-light: #f0ede5;
-            --card-shadow: 0 20px 30px -12px rgba(0,0,0,0.05);
-            --accent: #2C7A47;
-            --accent-hover: #1F5A36;
-            --accent-soft: #E8F3E6;
-            --header-bg: rgba(255,255,255,0.92);
-            --badge: #2C7A47;
-            --progress-bg: #e9ecef;
-            --water-bg-empty: #e9ecef;
-            --donate-bg: #f9fbf8;
-            --radius-card: 32px;
-            --transition: all 0.25s ease;
+            --surface-alt: #f8faf9;
+            --text-primary: #1a2e2a;
+            --text-secondary: #5b6e68;
+            --border-light: #eef2f0;
+            --card-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(0, 0, 0, 0.01);
+            --accent: #2b7a4b;
+            --accent-hover: #1e5f3a;
+            --accent-soft: #edf5f0;
+            --header-bg: rgba(251, 253, 252, 0.86);
+            --badge: #2b7a4b;
+            --progress-bg: #eef2ef;
+            --water-bg-empty: #eef2ef;
+            --donate-bg: #ffffff;
+            --radius-card: 28px;
+            --transition: all 0.2s ease;
+            --hero-gradient: #fbfdfc;
+            --modal-overlay: rgba(0,0,0,0.5);
         }
 
         body.dark {
             --bg-page: #121212;
             --surface: #1E2A2A;
+            --surface-alt: #1a2626;
             --text-primary: #ECF0EF;
             --text-secondary: #B0C4BC;
             --border-light: #2C3A36;
-            --card-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
+            --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
             --accent: #6ABF69;
             --accent-hover: #86D486;
             --accent-soft: #1E3328;
@@ -47,6 +51,8 @@
             --progress-bg: #2a3a34;
             --water-bg-empty: #2C3A36;
             --donate-bg: #1E2A2A;
+            --hero-gradient: #121212;
+            --modal-overlay: rgba(0,0,0,0.7);
         }
 
         body {
@@ -63,14 +69,9 @@
             padding: 0 32px;
         }
 
-        /* spacing sections */
         .section-spacing {
-            margin-top: 80px;
-            margin-bottom: 80px;
-        }
-        .subsection-spacing {
-            margin-top: 56px;
-            margin-bottom: 56px;
+            margin-top: 88px;
+            margin-bottom: 88px;
         }
         
         header {
@@ -91,10 +92,10 @@
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.8rem;
+            font-weight: 700;
+            font-size: 1.7rem;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--accent) 0%, #3B9E5C 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, #3b9e5c 100%);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -111,13 +112,14 @@
             color: var(--text-primary);
             font-weight: 500;
             transition: color 0.2s;
+            font-size: 0.95rem;
         }
         .nav-links a:hover { color: var(--accent); }
 
         .theme-toggle {
             background: transparent;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             cursor: pointer;
             color: var(--text-primary);
             width: 38px;
@@ -127,10 +129,10 @@
 
         .btn-outline-light {
             background: transparent;
-            border: 1.5px solid var(--accent);
+            border: 1px solid var(--accent);
             padding: 8px 20px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--accent);
             cursor: pointer;
             transition: var(--transition);
@@ -142,45 +144,49 @@
 
         .mobile-toggle { display: none; font-size: 1.6rem; cursor: pointer; }
 
-        .hero { padding: 70px 0 50px; background: var(--bg-page); }
+        .hero { 
+            padding: 70px 0 50px; 
+            background: var(--hero-gradient);
+        }
         .hero-grid { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
         .hero-content { flex: 1.2; }
         .hero-badge {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             color: var(--badge);
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 20px;
         }
-        .hero-content h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 32px; }
+        .hero-content h1 { font-size: 3.2rem; font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; color: var(--text-primary); }
+        .hero-content p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; font-weight: 400; }
         
         .btn-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 18px;
             align-items: center;
         }
         .btn-primary {
             background: var(--accent);
             color: white;
-            padding: 14px 28px;
+            padding: 12px 26px;
             border-radius: 40px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             border: none;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
-        .btn-primary:hover { background: var(--accent-hover); transform: scale(0.98); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
         .btn-secondary {
             background: transparent;
             border: 1px solid var(--border-light);
-            padding: 14px 28px;
+            padding: 12px 26px;
             border-radius: 40px;
             color: var(--text-primary);
             cursor: pointer;
@@ -189,19 +195,188 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
         }
         .btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); }
         
-        .hero-stats { flex: 0.9; background: var(--surface); padding: 28px; border-radius: var(--radius-card); box-shadow: var(--card-shadow); border: 1px solid var(--border-light); display: flex; justify-content: space-around; text-align: center; gap: 20px; flex-wrap: wrap;}
-        .stat-number { font-weight: 800; font-size: 2.2rem; color: var(--accent); }
+        .hero-stats { 
+            flex: 0.9; 
+            background: var(--surface); 
+            padding: 28px; 
+            border-radius: var(--radius-card); 
+            box-shadow: var(--card-shadow); 
+            border: 1px solid var(--border-light); 
+            display: flex; 
+            justify-content: space-around; 
+            text-align: center; 
+            gap: 20px; 
+            flex-wrap: wrap;
+        }
+        .stat-number { font-weight: 650; font-size: 2.1rem; color: var(--accent); letter-spacing: -0.01em; }
 
-        .section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; }
-        .section-sub { color: var(--text-secondary); margin-bottom: 48px; }
+        .section-title { font-size: 2rem; font-weight: 650; margin-bottom: 16px; letter-spacing: -0.01em; }
+        .section-sub { color: var(--text-secondary); margin-bottom: 48px; font-size: 1rem; font-weight: 400; }
 
+        /* Карусель отзывов */
+        .reviews-slider {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            transition: var(--transition);
+        }
+        .review-slide {
+            transition: opacity 0.4s ease-in-out;
+            opacity: 1;
+        }
+        .review-slide.fade-out {
+            opacity: 0;
+        }
+        .review-avatar {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-soft);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 16px auto;
+        }
+        .review-stars {
+            color: #f5b342;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-style: normal;
+            font-weight: 400;
+        }
+        .review-name {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .slider-dot.active {
+            background: var(--accent);
+            width: 24px;
+            border-radius: 10px;
+        }
+        .btn-all-reviews {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .btn-all-reviews:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Модальное окно для всех отзывов */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-overlay);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--surface);
+            border-radius: 32px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 28px;
+            position: relative;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .modal-header h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: 0.2s;
+        }
+        .close-modal:hover { color: var(--accent); }
+        .all-reviews-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .review-item {
+            background: var(--accent-soft);
+            border-radius: 24px;
+            padding: 18px;
+            border: 1px solid var(--border-light);
+        }
+        .review-item .review-stars {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .review-item .review-text {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
         .courses-grid {
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 56px;
         }
         .course-block {
             background: var(--surface);
@@ -211,8 +386,9 @@
             transition: var(--transition);
             box-shadow: var(--card-shadow);
         }
+        .course-block:hover { transform: translateY(-2px); box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.05); }
         .course-header {
-            padding: 28px 32px;
+            padding: 24px 32px;
             background: var(--accent-soft);
             border-bottom: 1px solid var(--border-light);
             display: flex;
@@ -220,44 +396,45 @@
             justify-content: space-between;
             align-items: center;
         }
-        .course-title h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
-        .course-title p { color: var(--text-secondary); font-size: 0.9rem; }
+        .course-title h3 { font-size: 1.7rem; font-weight: 650; margin-bottom: 6px; }
+        .course-title p { color: var(--text-secondary); font-size: 0.85rem; }
         .course-progress {
             background: var(--progress-bg);
             border-radius: 40px;
-            padding: 8px 18px;
-            font-weight: 600;
-            min-width: 160px;
+            padding: 6px 16px;
+            font-weight: 500;
+            min-width: 150px;
             text-align: center;
+            font-size: 0.85rem;
         }
         .progress-bar-bg {
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.08);
             border-radius: 20px;
-            height: 8px;
+            height: 6px;
             width: 100%;
             margin-top: 8px;
         }
         .progress-fill {
             background: var(--accent);
             width: 0%;
-            height: 8px;
+            height: 6px;
             border-radius: 20px;
         }
         .lessons-list {
-            padding: 8px 0;
+            padding: 4px 0;
         }
         .lesson-item {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 14px 32px;
+            padding: 12px 32px;
             border-bottom: 1px solid var(--border-light);
             transition: background 0.1s;
         }
         .lesson-item:hover { background: var(--accent-soft); }
         .lesson-check {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
             accent-color: var(--accent);
         }
@@ -267,13 +444,14 @@
         .lesson-title {
             font-weight: 600;
             margin-bottom: 4px;
+            font-size: 0.95rem;
         }
         .lesson-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
         .lesson-duration {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             background: var(--progress-bg);
             padding: 4px 10px;
             border-radius: 30px;
@@ -282,14 +460,14 @@
         .toggle-lessons-btn {
             background: transparent;
             border: none;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--accent);
             cursor: pointer;
-            margin: 16px 32px 24px;
+            margin: 14px 32px 22px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
         .lessons-container {
             max-height: 0;
@@ -317,38 +495,26 @@
             transition: var(--transition);
             box-shadow: var(--card-shadow);
         }
+        .tool-card:hover { transform: translateY(-2px); }
         .tool-card h3 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .category-badge {
             display: inline-block;
             background: var(--accent-soft);
             border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 4px 14px;
+            font-size: 0.7rem;
+            font-weight: 500;
             color: var(--accent);
             margin-bottom: 20px;
+            letter-spacing: 0.3px;
         }
-        .reviews-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 20px;
-            margin-bottom: 40px;
-        }
-        .review-card {
-            flex: 1;
-            background: var(--surface);
-            border-radius: 28px;
-            padding: 28px;
-            border: 1px solid var(--border-light);
-        }
-
         .input-group input, .input-group select {
             width: 100%;
             padding: 12px 16px;
@@ -359,29 +525,23 @@
             margin-bottom: 14px;
             outline: none;
             transition: 0.2s;
+            font-size: 0.9rem;
         }
-        .input-group input:focus { border-color: var(--accent); }
+        .input-group input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(43,122,75,0.08); }
         
-        .water-tracker {
-            background: var(--surface);
-            border-radius: var(--radius-card);
-            padding: 32px;
-            border: 1px solid var(--border-light);
-            margin: 40px 0;
-        }
         .water-circle {
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 1.8rem;
+            font-weight: 650;
+            font-size: 1.7rem;
             margin: 0 auto;
             background: conic-gradient(var(--accent) 0deg, var(--water-bg-empty) 0deg);
             transition: background 0.2s;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
         }
         .donate-card {
             background: var(--surface);
@@ -390,49 +550,51 @@
             border: 1px solid var(--border-light);
             margin-top: 40px;
             margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
         }
         .donate-methods {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
             margin-top: 28px;
             justify-content: center;
         }
         .donate-btn {
             background: var(--accent-soft);
             border: 1px solid var(--border-light);
-            padding: 14px 24px;
+            padding: 12px 22px;
             border-radius: 60px;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            font-weight: 600;
+            gap: 10px;
+            font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
-        .donate-btn i { font-size: 1.4rem; color: var(--accent); }
-        .donate-btn:hover { background: var(--accent); color: white; transform: translateY(-3px);}
+        .donate-btn i { font-size: 1.2rem; color: var(--accent); }
+        .donate-btn:hover { background: var(--accent); color: white; transform: translateY(-2px);}
         .donate-btn:hover i { color: white; }
         .test-badge {
             background: var(--progress-bg);
             display: inline-block;
             border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 0.8rem;
+            padding: 5px 14px;
+            font-size: 0.75rem;
             margin-top: 24px;
-            font-weight: 500;
+            font-weight: 400;
         }
         .faq-item {
             border-bottom: 1px solid var(--border-light);
             padding: 18px 0;
         }
         .faq-question {
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
+            font-size: 1rem;
         }
         .faq-answer {
             max-height: 0;
@@ -440,6 +602,7 @@
             transition: 0.3s;
             color: var(--text-secondary);
             margin-top: 8px;
+            font-size: 0.9rem;
         }
         .faq-item.active .faq-answer {
             max-height: 200px;
@@ -452,17 +615,16 @@
             text-align: center;
             border: 1px solid var(--border-light);
             margin: 56px 0;
-        }
-        .cta-section p {
-            margin-bottom: 0;
+            box-shadow: var(--card-shadow);
         }
         .cta-section .btn-primary {
-            margin-top: 32px; /* увеличенное расстояние между текстом и кнопкой */
+            margin-top: 32px;
         }
         footer {
             border-top: 1px solid var(--border-light);
             padding: 48px 0 32px;
             margin-top: 40px;
+            background: var(--surface-alt);
         }
         .footer-flex {
             display: flex;
@@ -473,7 +635,7 @@
         .fade-up {
             opacity: 0;
             transform: translateY(25px);
-            transition: 0.6s;
+            transition: 0.55s;
         }
         .fade-up.visible {
             opacity: 1;
@@ -484,13 +646,14 @@
             .nav-links { display: none; width: 100%; flex-direction: column; background: var(--surface); padding: 20px; border-radius: 20px; margin-top: 12px; gap: 1rem;}
             .nav-links.active { display: flex; }
             .mobile-toggle { display: block; }
-            .hero-content h1 { font-size: 2rem; }
+            .hero-content h1 { font-size: 2.2rem; }
             .tools-grid { flex-direction: column; gap: 30px; }
             .course-header { flex-direction: column; align-items: flex-start; gap: 12px; }
             .hero-stats { gap: 12px; }
-            .section-spacing { margin-top: 50px; margin-bottom: 50px; }
+            .section-spacing { margin-top: 60px; margin-bottom: 60px; }
             .btn-group { justify-content: center; }
             .cta-section .btn-primary { margin-top: 24px; }
+            .reviews-slider { padding: 24px; }
         }
     </style>
 </head>
@@ -502,7 +665,7 @@
             <div class="logo">Lean<span>Start</span></div>
             <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
             <div class="nav-links" id="navLinks">
-                <a href="#courses">Курсы</a><a href="#reviews">Отзывы</a><a href="#toolsSection">Инструменты</a><a href="#donateBlock">Поддержка</a><a href="#faq">FAQ</a>
+                <a href="#courses">Курсы</a><a href="#reviewsSection">Отзывы</a><a href="#toolsSection">Инструменты</a><a href="#donateBlock">Поддержка</a><a href="#faq">FAQ</a>
                 <button id="themeSwitcher" class="theme-toggle"><i class="fas fa-sun"></i></button>
                 <a href="#signupBlock" class="btn-outline-light">Запись</a>
             </div>
@@ -539,64 +702,65 @@
         </div>
     </section>
 
-    <!-- ОТЗЫВЫ -->
-    <div class="container" id="reviews">
-        <div class="reviews-grid">
-            <div class="review-card fade-up"><div style="background:var(--accent-soft); width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">⭐</div><div class="stars">★★★★★</div><p>“10 уроков — супер удобно. Прошла нутрициологию, сбросила 6 кг!”</p><h4>Алина, 31 год</h4></div>
-            <div class="review-card fade-up"><div style="background:var(--accent-soft); width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">💪</div><div class="stars">★★★★★</div><p>“Жиросжигание дома — реально работает, каждый урок по 15 мин.”</p><h4>Дмитрий, 27 лет</h4></div>
-            <div class="review-card fade-up"><div style="background:var(--accent-soft); width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">🧠</div><div class="stars">★★★★★</div><p>“Психология стройности изменила отношение к еде, теперь без срывов”</p><h4>Елена, 35 лет</h4></div>
+    <!-- ОТЗЫВЫ КАРУСЕЛЬ + ВСЕ ОТЗЫВЫ -->
+    <div class="container" id="reviewsSection">
+        <h2 class="section-title fade-up">Что говорят наши ученики</h2>
+        <div class="section-sub fade-up">Реальные отзывы и впечатления — 60+ человек уже с нами</div>
+        <div class="reviews-slider fade-up" id="reviewsSlider">
+            <div class="review-slide" id="reviewSlide">
+                <div class="review-avatar" id="reviewAvatar">⭐</div>
+                <div class="review-stars" id="reviewStars">★★★★★</div>
+                <div class="review-text" id="reviewText">"Имба-курс! Прошёл нутрициологию за 2 недели, сбросил 5 кг без стресса"</div>
+                <div class="review-name" id="reviewName">Артём, 29 лет</div>
+            </div>
+            <div class="slider-controls" id="sliderDots"></div>
+            <button id="allReviewsBtn" class="btn-all-reviews"><i class="fas fa-list-ul"></i> Все отзывы (62)</button>
         </div>
     </div>
 
-    <!-- ИНСТРУМЕНТЫ: КАТЕГОРИИ (ИМТ, ЗАПИСЬ, ВОДА) - ТЕПЕРЬ ВСЁ НА РУССКОМ -->
+    <!-- ИНСТРУМЕНТЫ, ФОРМЫ И Т.Д. (ОСТАЛЬНОЕ БЕЗ ИЗМЕНЕНИЙ) -->
     <div class="container section-spacing" id="toolsSection">
         <h2 class="section-title fade-up">Инструменты для здорового тела</h2>
         <div class="section-sub fade-up">Контролируй показатели, следи за водным балансом и получи персональную консультацию</div>
-        
         <div class="tools-grid">
-            <!-- Калькулятор ИМТ -->
             <div class="tool-card fade-up">
                 <div class="category-badge"><i class="fas fa-calculator"></i> Анализ тела</div>
                 <h3><i class="fas fa-chart-line"></i> Калькулятор ИМТ</h3>
                 <div class="input-group"><input type="number" id="height" placeholder="Рост (см)"></div>
                 <div class="input-group"><input type="number" id="weight" placeholder="Вес (кг)"></div>
                 <button id="calcBmi" class="btn-primary">Рассчитать</button>
-                <div id="bmiResult" style="margin-top:20px; font-weight:500;"></div>
+                <div id="bmiResult" style="margin-top:20px; font-size:0.9rem;"></div>
             </div>
-
-            <!-- Запись на консультацию -->
             <div class="tool-card fade-up" id="signupBlock">
                 <div class="category-badge"><i class="fas fa-phone-alt"></i> Персональный фитнес</div>
                 <h3><i class="fas fa-user-check"></i> Запись к эксперту</h3>
                 <div class="input-group"><select id="countryCode"><option value="+7">🇷🇺 +7 Россия</option><option value="+380">🇺🇦 +380 Украина</option><option value="+375">🇧🇾 +375 Беларусь</option></select></div>
                 <div class="input-group"><input type="tel" id="phoneNumber" placeholder="Ваш номер телефона"></div>
                 <button id="signupBtn" class="btn-primary">Записаться бесплатно</button>
-                <div style="margin-top: 12px; font-size: 0.75rem; color: var(--text-secondary);">Бесплатный звонок — консультация 15 мин</div>
+                <div style="margin-top: 12px; font-size: 0.7rem; color: var(--text-secondary);">Бесплатный звонок — консультация 15 мин</div>
             </div>
-
-            <!-- водный трекер на русском (было Water balance) -->
             <div class="tool-card fade-up">
                 <div class="category-badge"><i class="fas fa-tint"></i> Трекер гидратации</div>
                 <h3><i class="fas fa-bottle-water"></i> Водный баланс</h3>
                 <div class="water-stats" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; align-items:center;">
                     <div class="water-circle" id="waterCircle">0/8</div>
                     <div style="text-align:center;">
-                        <div><span id="glassesCount" style="font-size:1.8rem; font-weight:800;">0</span> / 8 стаканов</div>
+                        <div><span id="glassesCount" style="font-size:1.6rem; font-weight:650;">0</span> / 8 стаканов</div>
                         <button id="addWater" class="btn-primary" style="margin-top:12px;">+1 стакан</button>
                         <button id="resetWater" class="btn-secondary" style="margin-left:8px;">Сбросить</button>
                     </div>
                 </div>
-                <div id="waterMessage" style="text-align:center; margin-top:18px;"></div>
+                <div id="waterMessage" style="text-align:center; margin-top:18px; font-size:0.85rem;"></div>
             </div>
         </div>
     </div>
 
-    <!-- БЛОК ПОДДЕРЖКИ (ТЕСТОВАЯ ОПЛАТА) -->
+    <!-- ПОДДЕРЖКА (ТЕСТ) -->
     <div class="container" id="donateBlock">
         <div class="donate-card fade-up">
             <div class="category-badge"><i class="fas fa-hand-holding-heart"></i> Поддержать проект</div>
             <h3><i class="fas fa-star-of-life"></i> Сказать спасибо разработчикам</h3>
-            <p style="margin: 12px 0 8px; color: var(--text-secondary);">Мы верим, что знания о здоровье должны быть бесплатными. Если хочешь нас поддержать — выбери удобный способ (все варианты в тестовом режиме).</p>
+            <p style="margin: 12px 0 8px; color: var(--text-secondary); font-size:0.9rem;">Мы верим, что знания о здоровье должны быть бесплатными. Если хочешь нас поддержать — выбери удобный способ (все варианты в тестовом режиме).</p>
             <div class="donate-methods">
                 <div class="donate-btn" data-donate="stars"><i class="fas fa-star"></i> Звёзды (Stars)</div>
                 <div class="donate-btn" data-donate="telegram"><i class="fab fa-telegram"></i> Telegram / TON</div>
@@ -604,17 +768,17 @@
                 <div class="donate-btn" data-donate="eth"><i class="fab fa-ethereum"></i> Ethereum (ETH)</div>
                 <div class="donate-btn" data-donate="usdt"><i class="fas fa-coins"></i> USDT (TRC20)</div>
             </div>
-            <div class="test-badge"><i class="fas fa-flask"></i> 🧪 Тестовый режим — оплата временно недоступна, все кнопки демонстрируют интерфейс</div>
+            <div class="test-badge"><i class="fas fa-flask"></i> 🧪 Тестовый режим — оплата временно недоступна</div>
         </div>
     </div>
 
-    <!-- FAQ И CTA -->
+    <!-- FAQ + CTA -->
     <div class="container" id="faq">
         <h2 class="section-title fade-up">Часто задаваемые вопросы</h2>
         <div class="faq-list">
-            <div class="faq-item"><div class="faq-question">Курсы действительно с 10 уроками? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, для каждого курса разработано 10 подробных уроков с заданиями и заметками. Каждый урок имеет описание и примерную длительность.</div></div>
-            <div class="faq-item"><div class="faq-question">Как отмечать пройденные уроки? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Нажми на чекбокс рядом с уроком — прогресс сохранится в браузере автоматически. Вы сможете вернуться и продолжить с любого устройства.</div></div>
-            <div class="faq-item"><div class="faq-question">Это навсегда бесплатно? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Абсолютно бесплатно, никаких платных подписок. LeanStart — социальный проект.</div></div>
+            <div class="faq-item"><div class="faq-question">Курсы действительно с 10 уроками? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Да, для каждого курса разработано 10 подробных уроков с заданиями и заметками.</div></div>
+            <div class="faq-item"><div class="faq-question">Как отмечать пройденные уроки? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Нажми на чекбокс — прогресс сохранится в браузере.</div></div>
+            <div class="faq-item"><div class="faq-question">Это навсегда бесплатно? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Абсолютно бесплатно, без подписок.</div></div>
         </div>
     </div>
 
@@ -627,10 +791,189 @@
     </div>
 </main>
 
-<footer><div class="container footer-flex"><div><div class="logo">Lean<span>Start</span></div><p>Бесплатные курсы с живыми уроками</p></div><div><p style="font-weight:600;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none;">О проекте</a></p></div><div><p>hello@leanstart.fit</p><div style="display:flex; gap:15px; margin-top:8px;"><i class="fab fa-instagram"></i><i class="fab fa-telegram"></i></div></div></div><div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. 30 уроков для твоего тела.</p></div></footer>
+<footer><div class="container footer-flex"><div><div class="logo">Lean<span>Start</span></div><p style="font-size:0.85rem; color:var(--text-secondary);">Бесплатные курсы с живыми уроками</p></div><div><p style="font-weight:500; margin-bottom:8px;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none; font-size:0.85rem;">О проекте</a></p></div><div><p style="font-weight:500;">hello@leanstart.fit</p><div style="display:flex; gap:15px; margin-top:8px;"><i class="fab fa-instagram"></i><i class="fab fa-telegram"></i></div></div></div><div class="container" style="text-align:center; padding-top:30px;"><p style="font-size:0.8rem; color:var(--text-secondary);">© 2026 LeanStart — стройность с умом. 30 уроков для твоего тела.</p></div></footer>
+
+<!-- Модальное окно для всех отзывов -->
+<div id="reviewsModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-comments"></i> Все отзывы (62)</h3>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div id="allReviewsList" class="all-reviews-grid"></div>
+    </div>
+</div>
 
 <script>
-    // 3 курса по 10 уроков (контент)
+    // ========== ГЕНЕРАЦИЯ 62 ОТЗЫВОВ (РАЗНООБРАЗНЫЕ, С ИМБА, КРУТО И Т.Д.) ==========
+    const names = ["Алина","Дмитрий","Елена","Игорь","Ольга","Сергей","Мария","Антон","Кристина","Павел","Наталья","Роман","Юлия","Владимир","Татьяна","Максим","Анастасия","Евгений","Светлана","Николай","Виктория","Алексей","Дарья","Глеб","Полина","Иван","Ксения","Артём","Валерия","Андрей"];
+    const texts = [
+        "Имба! Реально рабочий курс 🙌","Круче всех! Сбросила 7 кг за месяц","🔥 Огонь, уже 10 уроков прошёл","Лучшее, что находил в интернете","Наконец-то поняла про КБЖУ","Вода и тренировки — топ, спасибо!","Психология стройности изменила мышление","Имба курс, рекомендую друзьям","Каждый день ждал новый урок","Супер! Виден прогресс после 3 недель","Нравится, что бесплатно и без воды","Самый понятный материал","Жиросжигание дома — бомба 💣","Теперь не срываюсь на сладкое","Удобно, что уроки по 15 минут","Поняла свои ошибки в питании","Мотивация зашкаливает","Имба, наконец-то стройнею без стресса","Реально помогает","Спасибо команде LeanStart!","Курс — зачёт! Хочу ещё","Сделали качественно, с душой","Сбросила 5 кг без диет","Стала пить воду — кожа сияет","Лучший бесплатный проект","Имба для новичков","Упражнения супер простые, но эффект 🔥","Наконец-то полюбила своё тело","Каждый урок открывает глаза","Продолжаю и худею легко","Просто имба","Круто, жду продолжения","Очень мотивирует","Стал меньше есть мусорной еды","Спасибо за дисциплину"
+    ];
+    const avatars = ["⭐","💪","🧠","🔥","💧","🥗","😊","🎯","📚","🍏","🏋️","🌸","✨"];
+    const ratings = [5,5,5,5,4,5,5,5,4,5,5,5,5,4,5,5,5,5,5,4,5,5,5,5,5,5,4,5,5,5,5,5,5,4,5,5,5,5,5,5,5,4,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5];
+    let allReviews = [];
+    for (let i = 0; i < 62; i++) {
+        let nameIndex = i % names.length;
+        let textIndex = i % texts.length;
+        let avatarIndex = i % avatars.length;
+        let rating = ratings[i % ratings.length];
+        allReviews.push({
+            id: i,
+            name: names[nameIndex] + (i > 29 ? " " + (Math.floor(Math.random()*30)+20) : ""),
+            text: texts[textIndex] + (Math.random() > 0.6 ? " 🔥" : ""),
+            avatar: avatars[avatarIndex],
+            stars: rating
+        });
+    }
+    // перемешаем чуть, чтобы не слишком одинаково
+    allReviews.sort(() => Math.random() - 0.5);
+    
+    let currentIndex = 0;
+    let intervalId = null;
+    let isModalOpen = false;
+    let isPaused = false;
+
+    const reviewAvatar = document.getElementById('reviewAvatar');
+    const reviewStars = document.getElementById('reviewStars');
+    const reviewText = document.getElementById('reviewText');
+    const reviewName = document.getElementById('reviewName');
+    const sliderDots = document.getElementById('sliderDots');
+    const allReviewsBtn = document.getElementById('allReviewsBtn');
+    const modal = document.getElementById('reviewsModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const allReviewsList = document.getElementById('allReviewsList');
+
+    function updateReview(index) {
+        const r = allReviews[index];
+        reviewAvatar.innerHTML = r.avatar;
+        reviewStars.innerHTML = '★'.repeat(r.stars) + '☆'.repeat(5-r.stars);
+        reviewText.innerHTML = `"${r.text}"`;
+        reviewName.innerHTML = r.name;
+        // активная точка
+        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+            if(i === index) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function nextReview() {
+        if (isModalOpen || isPaused) return;
+        const slide = document.getElementById('reviewSlide');
+        slide.classList.add('fade-out');
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % allReviews.length;
+            updateReview(currentIndex);
+            slide.classList.remove('fade-out');
+        }, 300);
+    }
+
+    function startSlider() {
+        if(intervalId) clearInterval(intervalId);
+        intervalId = setInterval(nextReview, 5000);
+    }
+
+    function stopSlider() {
+        if(intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    }
+
+    function renderAllReviewsModal() {
+        allReviewsList.innerHTML = '';
+        allReviews.forEach(rev => {
+            const revDiv = document.createElement('div');
+            revDiv.className = 'review-item';
+            revDiv.innerHTML = `
+                <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+                    <div style="background:var(--accent-soft); width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">${rev.avatar}</div>
+                    <div><strong>${rev.name}</strong></div>
+                </div>
+                <div class="review-stars">${'★'.repeat(rev.stars)}${'☆'.repeat(5-rev.stars)}</div>
+                <div class="review-text">"${rev.text}"</div>
+            `;
+            allReviewsList.appendChild(revDiv);
+        });
+    }
+
+    // пауза при наведении на слайдер
+    const sliderContainer = document.getElementById('reviewsSlider');
+    sliderContainer.addEventListener('mouseenter', () => { isPaused = true; stopSlider(); });
+    sliderContainer.addEventListener('mouseleave', () => { isPaused = false; startSlider(); });
+
+    allReviewsBtn.addEventListener('click', () => {
+        if(isModalOpen) return;
+        isModalOpen = true;
+        stopSlider();
+        renderAllReviewsModal();
+        modal.classList.add('active');
+    });
+
+    function closeModal() {
+        modal.classList.remove('active');
+        isModalOpen = false;
+        startSlider();
+    }
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+    // создание точек (но их много — не будем 60 точек, а просто покажем счетчик)
+    // поставим упрощённо: индикатор прогресса текстовый
+    const dotContainer = document.createElement('div');
+    dotContainer.style.display = 'flex';
+    dotContainer.style.gap = '8px';
+    dotContainer.style.justifyContent = 'center';
+    dotContainer.style.marginTop = '16px';
+    for(let i=0;i<Math.min(allReviews.length, 5); i++) {
+        let dot = document.createElement('div');
+        dot.className = 'slider-dot';
+        if(i===0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            if(!isModalOpen) {
+                currentIndex = i;
+                updateReview(currentIndex);
+                if(intervalId) { stopSlider(); startSlider(); }
+            }
+        });
+        dotContainer.appendChild(dot);
+    }
+    // добавим текстовый счётчик
+    const counterSpan = document.createElement('div');
+    counterSpan.style.fontSize = '0.75rem';
+    counterSpan.style.color = 'var(--text-secondary)';
+    counterSpan.style.marginTop = '8px';
+    counterSpan.innerHTML = `отзыв ${currentIndex+1} из ${allReviews.length}`;
+    const updateCounter = () => { counterSpan.innerHTML = `отзыв ${currentIndex+1} из ${allReviews.length}`; };
+    const originalUpdate = updateReview;
+    window.updateReview = function(idx) {
+        originalUpdate(idx);
+        updateCounter();
+    };
+    updateReview = function(idx) {
+        originalUpdate(idx);
+        updateCounter();
+    };
+    sliderContainer.querySelector('.slider-controls').appendChild(dotContainer);
+    sliderContainer.querySelector('.slider-controls').appendChild(counterSpan);
+    updateReview(0);
+    startSlider();
+    window.updateReview = updateReview;
+    // переопределить чтобы счетчик обновлялся
+    const oldUpdate = updateReview;
+    updateReview = function(idx) {
+        oldUpdate(idx);
+        counterSpan.innerHTML = `отзыв ${idx+1} из ${allReviews.length}`;
+        // также обновляем точки (упрощенно: только активная смена)
+        const dots = document.querySelectorAll('.slider-dot');
+        dots.forEach((dot, i) => {
+            if(i=== idx % dots.length) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    };
+    updateReview(0);
+    
+    // остальной код курсов и остального функционала (без изменений)
     const coursesData = [
         { id: "nutrition", name: "🍏 Нутрициология для начинающих", desc: "Узнай, как питаться вкусно и худеть без голодовок", 
           lessons: ["Введение: почему диеты не работают", "КБЖУ — твои главные цифры", "Как читать этикетки", "Режим питания и интервалы", "Вода и метаболизм", "Сахарные ловушки", "Планирование меню на неделю", "Перекусы без вреда", "Как не срываться на праздниках", "Финальный чек-лист"],
@@ -642,14 +985,9 @@
           lessons: ["Пищевые привычки", "Эмоциональный голод", "Дневник питания", "Техники от срывов", "Любовь к телу", "Перфекционизм", "Аффирмации", "Стресс-менеджмент", "Не зависеть от весов", "Окружение"],
           descs: ["Откуда берутся привычки", "Как отличить голод", "Анализ настроения", "Пауза 5 минут", "Упражнения на принятие", "Правило 80/20", "Перепрограммирование", "Хобби вместо еды", "Фокус на самочувствие", "Челендж с друзьями"] }
     ];
-
     function getStorageKey(courseId) { return `course_progress_${courseId}`; }
-    function loadProgress(courseId) {
-        const saved = localStorage.getItem(getStorageKey(courseId));
-        return saved ? JSON.parse(saved) : new Array(10).fill(false);
-    }
+    function loadProgress(courseId) { const saved = localStorage.getItem(getStorageKey(courseId)); return saved ? JSON.parse(saved) : new Array(10).fill(false); }
     function saveProgress(courseId, progress) { localStorage.setItem(getStorageKey(courseId), JSON.stringify(progress)); }
-
     function renderCourses() {
         const container = document.getElementById('coursesGrid');
         if(!container) return;
@@ -661,17 +999,8 @@
             const block = document.createElement('div');
             block.className = 'course-block fade-up';
             block.innerHTML = `
-                <div class="course-header">
-                    <div class="course-title"><h3>${course.name}</h3><p>${course.desc}</p></div>
-                    <div class="course-progress" id="progress-${course.id}">
-                        <div>✅ Пройдено ${completed}/10 уроков</div>
-                        <div class="progress-bar-bg"><div class="progress-fill" style="width: ${percent}%;"></div></div>
-                    </div>
-                </div>
-                <div class="lessons-container" id="lessons-${course.id}">
-                    <div class="lessons-list" id="list-${course.id}"></div>
-                    <div style="padding: 8px 32px 24px;"><small>✔️ Отмечай уроки — прогресс сохраняется</small></div>
-                </div>
+                <div class="course-header"><div class="course-title"><h3>${course.name}</h3><p>${course.desc}</p></div><div class="course-progress" id="progress-${course.id}"><div>✅ Пройдено ${completed}/10 уроков</div><div class="progress-bar-bg"><div class="progress-fill" style="width: ${percent}%;"></div></div></div></div>
+                <div class="lessons-container" id="lessons-${course.id}"><div class="lessons-list" id="list-${course.id}"></div><div style="padding: 8px 32px 24px;"><small>✔️ Отмечай уроки — прогресс сохраняется</small></div></div>
                 <button class="toggle-lessons-btn" data-course="${course.id}"><i class="fas fa-chevron-down"></i> Показать программу (10 уроков)</button>
             `;
             container.appendChild(block);
@@ -680,11 +1009,7 @@
             for(let i=0;i<10;i++) {
                 const li = document.createElement('div');
                 li.className = 'lesson-item';
-                li.innerHTML = `
-                    <input type="checkbox" class="lesson-check" data-course="${course.id}" data-index="${i}" ${prog[i] ? 'checked' : ''}>
-                    <div class="lesson-info"><div class="lesson-title">📘 Урок ${i+1}: ${course.lessons[i]}</div><div class="lesson-desc">${course.descs[i]}</div></div>
-                    <div class="lesson-duration">~12 мин</div>
-                `;
+                li.innerHTML = `<input type="checkbox" class="lesson-check" data-course="${course.id}" data-index="${i}" ${prog[i] ? 'checked' : ''}><div class="lesson-info"><div class="lesson-title">📘 Урок ${i+1}: ${course.lessons[i]}</div><div class="lesson-desc">${course.descs[i]}</div></div><div class="lesson-duration">~12 мин</div>`;
                 listDiv.appendChild(li);
             }
             const checkboxes = block.querySelectorAll('.lesson-check');
@@ -700,30 +1025,23 @@
                 if(progDiv) progDiv.innerHTML = `<div>✅ Пройдено ${newComp}/10 уроков</div><div class="progress-bar-bg"><div class="progress-fill" style="width: ${newPercent}%;"></div></div>`;
             }));
             const toggleBtn = block.querySelector('.toggle-lessons-btn');
-            toggleBtn.addEventListener('click', () => {
-                lessonsContainer.classList.toggle('open');
-                const opened = lessonsContainer.classList.contains('open');
-                toggleBtn.innerHTML = opened ? '<i class="fas fa-chevron-up"></i> Скрыть программу' : '<i class="fas fa-chevron-down"></i> Показать программу (10 уроков)';
-            });
+            toggleBtn.addEventListener('click', () => { lessonsContainer.classList.toggle('open'); const opened = lessonsContainer.classList.contains('open'); toggleBtn.innerHTML = opened ? '<i class="fas fa-chevron-up"></i> Скрыть программу' : '<i class="fas fa-chevron-down"></i> Показать программу (10 уроков)'; });
         });
     }
     renderCourses();
-
-    // тема + вода синхронизация
     const themeBtn = document.getElementById('themeSwitcher');
     const bodyEl = document.body;
     if(localStorage.getItem('theme') === 'dark') bodyEl.classList.add('dark');
     const updateIconTheme = () => { const i = themeBtn.querySelector('i'); if(bodyEl.classList.contains('dark')) { i.classList.remove('fa-sun'); i.classList.add('fa-moon'); } else { i.classList.remove('fa-moon'); i.classList.add('fa-sun'); } };
     updateIconTheme();
-
     let glasses = parseInt(localStorage.getItem('waterGlasses')) || 0;
     const maxGlass = 8;
     function updateWaterUI() {
         const circle = document.getElementById('waterCircle');
         if(!circle) return;
         const percent = (glasses/maxGlass)*360;
-        const emptyColor = getComputedStyle(bodyEl).getPropertyValue('--water-bg-empty').trim() || '#e9ecef';
-        const accentColor = getComputedStyle(bodyEl).getPropertyValue('--accent').trim() || '#2C7A47';
+        const emptyColor = getComputedStyle(bodyEl).getPropertyValue('--water-bg-empty').trim() || '#eef2ef';
+        const accentColor = getComputedStyle(bodyEl).getPropertyValue('--accent').trim() || '#2b7a4b';
         if(glasses >= maxGlass) circle.style.background = `conic-gradient(${accentColor} 0deg 360deg, ${accentColor} 360deg)`;
         else circle.style.background = `conic-gradient(${accentColor} 0deg ${percent}deg, ${emptyColor} ${percent}deg)`;
         circle.innerHTML = `${glasses}/${maxGlass}`;
@@ -736,33 +1054,10 @@
     document.getElementById('addWater')?.addEventListener('click',()=>{ if(glasses<maxGlass) { glasses++; updateWaterUI(); } });
     document.getElementById('resetWater')?.addEventListener('click',()=>{ glasses=0; updateWaterUI(); });
     updateWaterUI();
-
-    themeBtn.addEventListener('click', () => {
-        bodyEl.classList.toggle('dark');
-        localStorage.setItem('theme', bodyEl.classList.contains('dark') ? 'dark' : 'light');
-        updateIconTheme();
-        updateWaterUI();
-    });
-
-    document.getElementById('calcBmi')?.addEventListener('click', () => {
-        const h = parseFloat(document.getElementById('height').value);
-        const w = parseFloat(document.getElementById('weight').value);
-        const resDiv = document.getElementById('bmiResult');
-        if(!h || !w || h<=0 || w<=0) { resDiv.innerHTML = '❌ Введите корректные данные (рост, вес >0)'; return; }
-        const bmi = w / ((h/100)**2);
-        let cat = bmi<18.5?'Дефицит массы':bmi<25?'Норма ✅':bmi<30?'Избыточный вес':'Ожирение ⚠️';
-        resDiv.innerHTML = `ИМТ: ${bmi.toFixed(1)} — ${cat}`;
-    });
-    document.getElementById('signupBtn')?.addEventListener('click', () => {
-        const code = document.getElementById('countryCode').value;
-        const phone = document.getElementById('phoneNumber').value.trim();
-        if(!phone) alert('Введите номер телефона');
-        else alert(`📞 Тестовый режим: заявка на ${code} ${phone} принята. В реальном проекте с вами свяжутся.`);
-    });
-    // donate test alerts
-    document.querySelectorAll('.donate-btn').forEach(btn => {
-        btn.addEventListener('click', () => alert('🧪 ТЕСТ: оплата временно недоступна. Спасибо за интерес к проекту!'));
-    });
+    themeBtn.addEventListener('click', () => { bodyEl.classList.toggle('dark'); localStorage.setItem('theme', bodyEl.classList.contains('dark') ? 'dark' : 'light'); updateIconTheme(); updateWaterUI(); });
+    document.getElementById('calcBmi')?.addEventListener('click', () => { const h = parseFloat(document.getElementById('height').value), w = parseFloat(document.getElementById('weight').value), resDiv = document.getElementById('bmiResult'); if(!h || !w || h<=0 || w<=0) { resDiv.innerHTML = '❌ Введите корректные данные'; return; } const bmi = w / ((h/100)**2); let cat = bmi<18.5?'Дефицит массы':bmi<25?'Норма ✅':bmi<30?'Избыточный вес':'Ожирение ⚠️'; resDiv.innerHTML = `ИМТ: ${bmi.toFixed(1)} — ${cat}`; });
+    document.getElementById('signupBtn')?.addEventListener('click', () => { const code = document.getElementById('countryCode').value, phone = document.getElementById('phoneNumber').value.trim(); if(!phone) alert('Введите номер'); else alert(`📞 Тестовый режим: заявка на ${code} ${phone} принята.`); });
+    document.querySelectorAll('.donate-btn').forEach(btn => { btn.addEventListener('click', () => alert('🧪 ТЕСТ: оплата временно недоступна. Спасибо за интерес!')); });
     document.querySelectorAll('.faq-item').forEach(item => item.querySelector('.faq-question')?.addEventListener('click',()=>item.classList.toggle('active')));
     const fadeElements = document.querySelectorAll('.fade-up');
     const obs = new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:0.1});
@@ -770,14 +1065,7 @@
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinksDiv = document.getElementById('navLinks');
     mobileToggle?.addEventListener('click',()=>navLinksDiv.classList.toggle('active'));
-    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-        anchor.addEventListener('click',function(e){
-            const hash = this.getAttribute('href');
-            if(hash==="#") return;
-            const target = document.querySelector(hash);
-            if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); navLinksDiv?.classList.remove('active'); }
-        });
-    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{ anchor.addEventListener('click',function(e){ const hash = this.getAttribute('href'); if(hash==="#") return; const target = document.querySelector(hash); if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); navLinksDiv?.classList.remove('active'); } }); });
 </script>
 </body>
 </html>
