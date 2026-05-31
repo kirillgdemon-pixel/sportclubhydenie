@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>LeanStart | Круглый прогресс с 0%, калькулятор ккал, статьи</title>
+    <title>LeanStart | Круглый прогресс, статьи, рецепты</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -108,6 +108,7 @@
             display: flex;
             gap: 2rem;
             align-items: center;
+            flex-wrap: wrap;
         }
         .nav-links a {
             text-decoration: none;
@@ -264,7 +265,7 @@
         .all-reviews-grid { display: flex; flex-direction: column; gap: 20px; }
         .review-item { background: var(--accent-soft); border-radius: 24px; padding: 18px; border: 1px solid var(--border-light); }
 
-        /* КУРСЫ с круговым прогрессом — всегда рисуем 0% изначально */
+        /* КУРСЫ с круговым прогрессом */
         .courses-grid { display: flex; flex-direction: column; gap: 56px; }
         .course-block {
             background: var(--surface); border-radius: var(--radius-card); border: 1px solid var(--border-light);
@@ -277,14 +278,26 @@
         .course-title h3 { font-size: 1.7rem; font-weight: 650; margin-bottom: 6px; }
         .course-title p { color: var(--text-secondary); font-size: 0.85rem; }
         .circular-progress {
-            width: 70px; height: 70px; position: relative; display: flex; align-items: center; justify-content: center;
+            width: 70px;
+            height: 70px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
         .circular-progress canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
         }
         .progress-percent {
-            font-weight: 700; font-size: 0.9rem; color: var(--accent); z-index: 2;
+            display: none;
         }
+
         .lessons-list { padding: 4px 0; }
         .lesson-item {
             display: flex; align-items: center; gap: 16px; padding: 12px 32px; border-bottom: 1px solid var(--border-light);
@@ -338,22 +351,44 @@
         .test-badge { background: var(--progress-bg); display: inline-block; border-radius: 100px; padding: 5px 14px; font-size: 0.75rem; margin-top: 24px; }
 
         /* СТАТЬИ */
-        .articles-grid {
+        .articles-grid, .recipes-grid {
             display: flex; flex-wrap: wrap; gap: 30px; margin-top: 40px;
         }
-        .article-card {
+        .article-card, .recipe-card {
             flex: 1; min-width: 260px; background: var(--surface); border-radius: 1.8rem; overflow: hidden;
             border: 1px solid var(--border-light); transition: 0.2s; box-shadow: var(--card-shadow);
         }
-        .article-card:hover { transform: translateY(-4px); }
-        .article-img {
+        .article-card:hover, .recipe-card:hover { transform: translateY(-4px); }
+        .article-img, .recipe-img {
             width: 100%; height: 180px; object-fit: cover; background: var(--accent-soft);
         }
-        .article-content { padding: 20px; }
-        .article-content h4 { font-size: 1.3rem; margin-bottom: 10px; }
-        .article-content p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; }
-        .read-more {
+        .article-content, .recipe-content { padding: 20px; }
+        .article-content h4, .recipe-content h4 { font-size: 1.3rem; margin-bottom: 10px; }
+        .article-content p, .recipe-content p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.4; }
+        .read-more, .cook-btn {
             display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 500; text-decoration: none;
+            cursor: pointer;
+        }
+        .full-article-content, .full-recipe-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.3s;
+            background: var(--accent-soft);
+            border-top: 1px solid var(--border-light);
+            padding: 0 20px;
+        }
+        .full-article-content.open, .full-recipe-content.open {
+            max-height: 600px;
+            padding: 20px;
+        }
+        .full-article-content p, .full-recipe-content p, .full-recipe-content ul {
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .full-recipe-content ul {
+            padding-left: 20px;
         }
 
         .faq-item { border-bottom: 1px solid var(--border-light); padding: 18px 0; }
@@ -383,12 +418,12 @@
             .nav-links.active { display: flex; }
             .mobile-toggle { display: block; }
             .hero-content h1 { font-size: 2.2rem; }
-            .tools-grid, .articles-grid { flex-direction: column; gap: 30px; }
+            .tools-grid, .articles-grid, .recipes-grid { flex-direction: column; gap: 30px; }
         }
         /* анимация нажатия */
         .btn-primary, .btn-secondary, .btn-outline-light, .theme-toggle, .donate-btn, .toggle-lessons-btn,
         .btn-all-reviews, .slider-dot, .close-modal, .social-circle, .faq-question, .mobile-toggle, .nav-links a,
-        #addWater, #resetWater, #calcBmi, #signupBtn, #calcKcalBtn, .read-more {
+        #addWater, #resetWater, #calcBmi, #signupBtn, #calcKcalBtn, .read-more, .cook-btn {
             transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.1s ease;
             transform: scale(1);
         }
@@ -396,7 +431,7 @@
         .donate-btn:active, .toggle-lessons-btn:active, .btn-all-reviews:active, .slider-dot:active,
         .close-modal:active, .social-circle:active, .faq-question:active, .mobile-toggle:active,
         .nav-links a:active, #addWater:active, #resetWater:active, #calcBmi:active, #signupBtn:active,
-        #calcKcalBtn:active, .read-more:active {
+        #calcKcalBtn:active, .read-more:active, .cook-btn:active {
             transform: scale(0.96);
             opacity: 0.9;
         }
@@ -412,8 +447,13 @@
             <div class="logo">Lean<span>Start</span></div>
             <div class="mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></div>
             <div class="nav-links" id="navLinks">
-                <a href="#courses">Курсы</a><a href="#reviewsSection">Отзывы</a><a href="#toolsSection">Инструменты</a>
-                <a href="#articlesSection">Статьи</a><a href="#donateBlock">Поддержка</a><a href="#faq">FAQ</a>
+                <a href="#courses">Курсы</a>
+                <a href="#reviewsSection">Отзывы</a>
+                <a href="#toolsSection">Инструменты</a>
+                <a href="#articlesSection">Статьи</a>
+                <a href="#recipesSection">Рецепты</a>
+                <a href="#donateBlock">Поддержка</a>
+                <a href="#faq">FAQ</a>
                 <button id="themeSwitcher" class="theme-toggle"><i class="fas fa-sun"></i></button>
                 <a href="#signupBlock" class="btn-outline-light">Запись</a>
             </div>
@@ -513,26 +553,35 @@
         </div>
     </div>
 
-    <!-- СТАТЬИ (исправленные фото и ссылки) -->
+    <!-- СТАТЬИ -->
     <div class="container section-spacing" id="articlesSection">
         <h2 class="section-title fade-up">Полезные статьи</h2>
-        <div class="section-sub fade-up">Научный подход к питанию, гидратации и движению</div>
+        <div class="section-sub fade-up">Нажми «Читать», чтобы открыть полный текст</div>
         <div class="articles-grid">
             <div class="article-card fade-up">
                 <img class="article-img" src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Здоровая еда" loading="lazy">
                 <div class="article-content">
                     <h4>🍎 Еда как топливо</h4>
                     <p>Как баланс белков, жиров и углеводов ускоряет метаболизм. Рецепты и советы от диетологов.</p>
-                    <a href="javascript:void(0)" class="read-more" data-article="food">Читать →</a>
+                    <span class="read-more" data-article="food">Читать →</span>
+                </div>
+                <div class="full-article-content" id="full-food">
+                    <p><strong>Полный текст статьи:</strong> Правильное питание — это не диета, а образ жизни. Белки (мясо, рыба, бобовые) дают чувство сытости и строят мышцы. Жиры (орехи, авокадо, оливковое масло) нужны для гормонов и кожи. Углеводы (гречка, овсянка, овощи) — главное топливо для мозга и тела.</p>
+                    <p>Пример сбалансированного дня: завтрак — омлет с овощами, обед — гречка с курицей и салатом, ужин — рыба на пару с цветной капустой. Перекусы: яблоко, горсть орехов. Пейте воду за 20 минут до еды — это снижает аппетит.</p>
+                    <p>Старайтесь готовить дома, избегайте скрытого сахара (соусы, йогурты, колбасы). Через 2 недели вы заметите прилив энергии и лёгкость.</p>
                 </div>
             </div>
             <div class="article-card fade-up">
-                <!-- НОВАЯ РАБОЧАЯ ФОТОГРАФИЯ ВОДЫ (заменена) -->
                 <img class="article-img" src="https://images.pexels.com/photos/3730160/pexels-photo-3730160.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Вода" loading="lazy">
                 <div class="article-content">
                     <h4>💧 Водный баланс</h4>
                     <p>Сколько пить, чтобы худеть и сохранять энергию. Инфографика и простые правила.</p>
-                    <a href="javascript:void(0)" class="read-more" data-article="water">Читать →</a>
+                    <span class="read-more" data-article="water">Читать →</span>
+                </div>
+                <div class="full-article-content" id="full-water">
+                    <p><strong>Норма воды: 30–40 мл на 1 кг веса.</strong> Для человека 70 кг это 2.1–2.8 литра в день. Вода ускоряет метаболизм на 24% в течение часа после приёма, снижает чувство голода и улучшает состояние кожи.</p>
+                    <p>Как пить правильно: стакан тёплой воды утром натощак, за 20 минут до каждого приёма пищи — по стакану, в течение дня — маленькими глотками. Не запивайте еду — это растягивает желудок.</p>
+                    <p>Лайфхак: поставьте бутылку воды на рабочий стол и отмечайте каждый выпитый стакан. Через месяц войдёт в привычку.</p>
                 </div>
             </div>
             <div class="article-card fade-up">
@@ -540,7 +589,74 @@
                 <div class="article-content">
                     <h4>🏃‍♀️ Активность без зала</h4>
                     <p>Домашние тренировки, которые сжигают жир. План для новичков и продвинутых.</p>
-                    <a href="javascript:void(0)" class="read-more" data-article="sport">Читать →</a>
+                    <span class="read-more" data-article="sport">Читать →</span>
+                </div>
+                <div class="full-article-content" id="full-sport">
+                    <p><strong>Достаточно 20–30 минут в день:</strong> приседания (3×15), отжимания от пола или стены (3×10), выпады (3×12 на каждую ногу), планка (3×30 секунд), берпи (3×8). Такая тренировка разгоняет метаболизм на 6–8 часов.</p>
+                    <p>Для жиросжигания важно чередовать кардио и силовые. Пример круговой тренировки: 1 минута прыжков на месте, 30 секунд отдыха, 1 минута приседаний, отдых, 1 минута «скалолаза», отдых. Повторить 3 круга.</p>
+                    <p>Не забывайте про заминку и растяжку — они предотвращают травмы и улучшают восстановление.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- РЕЦЕПТЫ -->
+    <div class="container section-spacing" id="recipesSection">
+        <h2 class="section-title fade-up">🥗 Простые рецепты</h2>
+        <div class="section-sub fade-up">Нажми «Приготовить», чтобы увидеть ингредиенты и шаги</div>
+        <div class="recipes-grid">
+            <div class="recipe-card fade-up">
+                <img class="recipe-img" src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Овсяноблин" loading="lazy">
+                <div class="recipe-content">
+                    <h4>🍌 Овсяноблин с бананом</h4>
+                    <p>Завтрак за 5 минут, который даёт энергию на 4 часа.</p>
+                    <span class="cook-btn" data-recipe="oatmeal">Приготовить →</span>
+                </div>
+                <div class="full-recipe-content" id="recipe-oatmeal">
+                    <p><strong>Ингредиенты:</strong></p>
+                    <ul><li>Овсяные хлопья — 40 г</li><li>Яйцо — 1 шт.</li><li>Банан — 1/2 шт.</li><li>Молоко (или вода) — 50 мл</li><li>Корица — по вкусу</li></ul>
+                    <p><strong>Приготовление:</strong> В блендере смешайте овсянку, яйцо, банан и молоко до однородности. Вылейте на разогретую антипригарную сковороду, жарьте 2 минуты с каждой стороны. Подавайте с ягодами или йогуртом.</p>
+                </div>
+            </div>
+            <div class="recipe-card fade-up">
+                <img class="recipe-img" src="https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Курица с гречкой" loading="lazy">
+                <div class="recipe-content">
+                    <h4>🍗 Курица с гречкой и овощами</h4>
+                    <p>Сытный обед для стройности.</p>
+                    <span class="cook-btn" data-recipe="chicken">Приготовить →</span>
+                </div>
+                <div class="full-recipe-content" id="recipe-chicken">
+                    <p><strong>Ингредиенты:</strong></p>
+                    <ul><li>Филе куриное — 150 г</li><li>Гречка (сухая) — 50 г</li><li>Брокколи — 100 г</li><li>Соевый соус — 1 ст. ложка</li><li>Чеснок, специи</li></ul>
+                    <p><strong>Приготовление:</strong> Отварите гречку. Нарежьте курицу кубиками, обжарьте без масла на антипригарной сковороде. Добавьте брокколи, чеснок, соевый соус и тушите 7 минут. Смешайте с гречкой.</p>
+                </div>
+            </div>
+            <div class="recipe-card fade-up">
+                <!-- НОВАЯ ФОТОГРАФИЯ РЫБЫ (ПО ССЫЛКЕ ПОЛЬЗОВАТЕЛЯ) -->
+                <img class="recipe-img" src="https://thf.bing.com/th/id/OIP.4A7X6g0yvl2eSNA5uthb1AHaHH?w=180&h=180&c=7&r=0&o=7&cb=thfc1falcon&dpr=1.3&pid=1.7&rm=3" alt="Запечённая рыба" loading="lazy">
+                <div class="recipe-content">
+                    <h4>🐟 Запечённая рыба с овощами</h4>
+                    <p>Лёгкий ужин, богатый омега-3.</p>
+                    <span class="cook-btn" data-recipe="fish">Приготовить →</span>
+                </div>
+                <div class="full-recipe-content" id="recipe-fish">
+                    <p><strong>Ингредиенты:</strong></p>
+                    <ul><li>Филе белой рыбы (треска/минтай) — 200 г</li><li>Кабачок — 1/2 шт.</li><li>Помидоры черри — 6 шт.</li><li>Лимон, розмарин, соль</li></ul>
+                    <p><strong>Приготовление:</strong> Разогрейте духовку до 180°C. Выложите рыбу на фольгу, добавьте нарезанные овощи, сбрызните лимоном, посолите. Запекайте 20 минут.</p>
+                </div>
+            </div>
+            <div class="recipe-card fade-up">
+                <!-- НОВАЯ ФОТОГРАФИЯ ДЕСЕРТА (ПО ССЫЛКЕ ПОЛЬЗОВАТЕЛЯ) -->
+                <img class="recipe-img" src="https://thf.bing.com/th/id/OIP.vnrqSPMoVprSlNMI0I5fLAHaE5?w=272&h=180&c=7&r=0&o=7&cb=thfc1falcon&dpr=1.3&pid=1.7&rm=3" alt="Творожный десерт" loading="lazy">
+                <div class="recipe-content">
+                    <h4>🍓 Творожный десерт без сахара</h4>
+                    <p>Перекус, который убирает тягу к сладкому.</p>
+                    <span class="cook-btn" data-recipe="curd">Приготовить →</span>
+                </div>
+                <div class="full-recipe-content" id="recipe-curd">
+                    <p><strong>Ингредиенты:</strong></p>
+                    <ul><li>Творог 5% — 150 г</li><li>Натуральный йогурт — 2 ст. ложки</li><li>Ягоды (клубника/черника) — 50 г</li><li>Ванилин, стевия (по желанию)</li></ul>
+                    <p><strong>Приготовление:</strong> Смешайте творог с йогуртом до кремообразного состояния. Добавьте ягоды и перемешайте. При желании подсластите стевией.</p>
                 </div>
             </div>
         </div>
@@ -582,13 +698,13 @@
         <div><p style="font-weight:500;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none;">О проекте</a></p></div>
         <div><p style="font-weight:500;">hello@leanstart.fit</p><div class="social-links"><a href="https://t.me/ForeLeanStart" target="_blank" class="social-circle"><i class="fab fa-telegram"></i></a><div class="social-circle" id="igLink"><i class="fab fa-instagram"></i></div></div></div>
     </div>
-    <div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. Круглый прогресс с 0%, калькулятор ккал и статьи.</p></div>
+    <div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. Круглый прогресс, статьи и рецепты.</p></div>
 </footer>
 
 <div id="reviewsModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-comments"></i> Все отзывы (62)</h3><button class="close-modal" id="closeModalBtn">&times;</button></div><div id="allReviewsList" class="all-reviews-grid"></div></div></div>
 
 <script>
-    // -------------------- КУРСЫ С КРУГОВЫМ ПРОГРЕССОМ (всегда рисуем 0% при старте) --------------------
+    // -------------------- КУРСЫ (круглый прогресс) --------------------
     const coursesData = [
         { id: "nutrition", name: "🍏 Нутрициология для начинающих", desc: "Узнай, как питаться вкусно и худеть без голодовок", 
           lessons: ["Введение: почему диеты не работают", "КБЖУ — твои главные цифры", "Как читать этикетки", "Режим питания и интервалы", "Вода и метаболизм", "Сахарные ловушки", "Планирование меню на неделю", "Перекусы без вреда", "Как не срываться на праздниках", "Финальный чек-лист"],
@@ -609,28 +725,32 @@
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const size = canvas.width;
-        const center = size/2;
-        const radius = size/2 - 4;
+        const center = size / 2;
+        const radius = size / 2 - 4;
         const startAngle = -0.5 * Math.PI;
         const endAngle = startAngle + (percent / 100) * 2 * Math.PI;
         ctx.clearRect(0, 0, size, size);
-        // Рисуем серый фон (окружность) — чтобы не было пустого белого круга
+        const bodyStyles = getComputedStyle(document.body);
+        const borderColor = bodyStyles.getPropertyValue('--border-light').trim() || '#eef2f0';
+        const accentColor = bodyStyles.getPropertyValue('--accent').trim() || '#2b7a4b';
+        const textColor = bodyStyles.getPropertyValue('--text-primary').trim() || '#1a2e2a';
         ctx.beginPath();
-        ctx.arc(center, center, radius, 0, 2*Math.PI);
-        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--border-light').trim() || '#eef2f0';
+        ctx.arc(center, center, radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = borderColor;
         ctx.lineWidth = 5;
         ctx.stroke();
-        // Рисуем цветной прогресс (если percent > 0, иначе не рисуем, но фон уже есть)
         if (percent > 0) {
             ctx.beginPath();
             ctx.arc(center, center, radius, startAngle, endAngle);
-            ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#2b7a4b';
+            ctx.strokeStyle = accentColor;
             ctx.stroke();
         }
-        // Текст процента
-        ctx.font = `bold ${size * 0.22}px 'Inter'`;
-        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-primary').trim() || '#1a2e2a';
-        ctx.fillText(`${Math.round(percent)}%`, center - 12, center + 6);
+        const text = `${Math.round(percent)}%`;
+        ctx.font = `bold ${size * 0.22}px 'Inter', sans-serif`;
+        ctx.fillStyle = textColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, center, center);
     }
 
     function updateProgressCircle(courseId) {
@@ -640,6 +760,10 @@
         const canvas = document.getElementById(`progress-canvas-${courseId}`);
         if (canvas) drawCircularProgress(canvas, percent);
         return percent;
+    }
+
+    function redrawAllProgressCircles() {
+        coursesData.forEach(course => updateProgressCircle(course.id));
     }
 
     function renderCourses() {
@@ -657,7 +781,6 @@
                     <div class="course-title"><h3>${course.name}</h3><p>${course.desc}</p></div>
                     <div class="circular-progress">
                         <canvas id="progress-canvas-${course.id}" width="70" height="70"></canvas>
-                        <span class="progress-percent"></span>
                     </div>
                 </div>
                 <div class="lessons-container" id="lessons-${course.id}">
@@ -731,9 +854,38 @@
     const counterSpan=document.createElement('div'); counterSpan.className='review-counter'; counterSpan.style.cssText='font-size:0.75rem;color:var(--text-secondary);margin-top:6px;'; counterSpan.innerHTML=`отзыв 1 из ${allReviews.length}`; sliderContainer.querySelector('.slider-controls').appendChild(counterSpan);
     updateReview(0); startSlider();
 
+    // -------------------- РАСКРЫТИЕ СТАТЕЙ И РЕЦЕПТОВ --------------------
+    function initArticlesAndRecipes() {
+        // Статьи
+        document.querySelectorAll('.read-more').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = btn.closest('.article-card');
+                const fullContent = card.querySelector('.full-article-content');
+                if (fullContent) {
+                    fullContent.classList.toggle('open');
+                    btn.textContent = fullContent.classList.contains('open') ? 'Скрыть ↑' : 'Читать →';
+                }
+            });
+        });
+        // Рецепты
+        document.querySelectorAll('.cook-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = btn.closest('.recipe-card');
+                const fullContent = card.querySelector('.full-recipe-content');
+                if (fullContent) {
+                    fullContent.classList.toggle('open');
+                    btn.textContent = fullContent.classList.contains('open') ? 'Скрыть ↑' : 'Приготовить →';
+                }
+            });
+        });
+    }
+
     // -------------------- ОБЩАЯ ИНИЦИАЛИЗАЦИЯ --------------------
     window.addEventListener('load', () => {
         renderCourses();
+        initArticlesAndRecipes();
 
         // Тема
         const themeBtn = document.getElementById('themeSwitcher');
@@ -761,7 +913,13 @@
         document.getElementById('addWater')?.addEventListener('click',()=>{ if(glasses<maxGlass) { glasses++; updateWaterUI(); } });
         document.getElementById('resetWater')?.addEventListener('click',()=>{ glasses=0; updateWaterUI(); });
         updateWaterUI();
-        themeBtn.addEventListener('click', () => { bodyEl.classList.toggle('dark'); localStorage.setItem('theme', bodyEl.classList.contains('dark') ? 'dark' : 'light'); updateIconTheme(); updateWaterUI(); coursesData.forEach(c=>updateProgressCircle(c.id)); });
+        themeBtn.addEventListener('click', () => {
+            bodyEl.classList.toggle('dark');
+            localStorage.setItem('theme', bodyEl.classList.contains('dark') ? 'dark' : 'light');
+            updateIconTheme();
+            updateWaterUI();
+            redrawAllProgressCircles();
+        });
         document.getElementById('calcBmi')?.addEventListener('click', () => { const h = parseFloat(document.getElementById('height').value), w = parseFloat(document.getElementById('weight').value), resDiv = document.getElementById('bmiResult'); if(!h || !w || h<=0 || w<=0) { resDiv.innerHTML = '❌ Введите корректные данные'; return; } const bmi = w / ((h/100)**2); let cat = bmi<18.5?'Дефицит массы':bmi<25?'Норма ✅':bmi<30?'Избыточный вес':'Ожирение ⚠️'; resDiv.innerHTML = `ИМТ: ${bmi.toFixed(1)} — ${cat}`; });
         document.getElementById('signupBtn')?.addEventListener('click', () => { const code = document.getElementById('countryCode').value, phone = document.getElementById('phoneNumber').value.trim(); if(!phone) alert('Введите номер'); else alert(`📞 Тестовый режим: заявка на ${code} ${phone} принята.`); });
         document.querySelectorAll('.donate-btn').forEach(btn => { btn.addEventListener('click', () => alert('🧪 ТЕСТ: оплата временно недоступна. Спасибо за интерес!')); });
@@ -775,21 +933,12 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor=>{ anchor.addEventListener('click',function(e){ const hash = this.getAttribute('href'); if(hash==="#") return; const target = document.querySelector(hash); if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); navLinksDiv?.classList.remove('active'); } }); });
         document.getElementById('igLink')?.addEventListener('click', () => alert('📷 Instagram-страница пока недоступна.'));
 
-        // КАЛЬКУЛЯТОР КАЛОРИЙ
         document.getElementById('calcKcalBtn')?.addEventListener('click', () => {
             const protein = parseFloat(document.getElementById('protein').value) || 0;
             const fat = parseFloat(document.getElementById('fat').value) || 0;
             const carbs = parseFloat(document.getElementById('carbs').value) || 0;
             const kcal = protein * 4 + fat * 9 + carbs * 4;
             document.getElementById('kcalResult').innerHTML = `🔥 ${kcal.toFixed(0)} ккал<br><span style="font-size:0.8rem;">Б:${protein}г Ж:${fat}г У:${carbs}г</span>`;
-        });
-
-        // ИСПРАВЛЕНИЕ ДЛЯ ССЫЛОК "ЧИТАТЬ →"
-        document.querySelectorAll('.read-more').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('📖 Эта статья появится совсем скоро! Следите за обновлениями.');
-            });
         });
     });
 </script>
