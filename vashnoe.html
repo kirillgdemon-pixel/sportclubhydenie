@@ -155,6 +155,13 @@
         }
         .hero-content h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
         .hero-content p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 32px; }
+        
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
         .btn-primary {
             background: var(--accent);
             color: white;
@@ -178,7 +185,13 @@
             color: var(--text-primary);
             cursor: pointer;
             transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
+        .btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); }
+        
         .hero-stats { flex: 0.9; background: var(--surface); padding: 28px; border-radius: var(--radius-card); box-shadow: var(--card-shadow); border: 1px solid var(--border-light); display: flex; justify-content: space-around; text-align: center; gap: 20px; flex-wrap: wrap;}
         .stat-number { font-weight: 800; font-size: 2.2rem; color: var(--accent); }
 
@@ -288,7 +301,6 @@
             transition: max-height 0.6s ease-in;
         }
 
-        /* categories grid */
         .tools-grid {
             display: flex;
             flex-wrap: wrap;
@@ -327,6 +339,7 @@
             flex-wrap: wrap;
             gap: 30px;
             margin-top: 20px;
+            margin-bottom: 40px;
         }
         .review-card {
             flex: 1;
@@ -440,6 +453,12 @@
             border: 1px solid var(--border-light);
             margin: 56px 0;
         }
+        .cta-section p {
+            margin-bottom: 0;
+        }
+        .cta-section .btn-primary {
+            margin-top: 32px; /* увеличенное расстояние между текстом и кнопкой */
+        }
         footer {
             border-top: 1px solid var(--border-light);
             padding: 48px 0 32px;
@@ -470,6 +489,8 @@
             .course-header { flex-direction: column; align-items: flex-start; gap: 12px; }
             .hero-stats { gap: 12px; }
             .section-spacing { margin-top: 50px; margin-bottom: 50px; }
+            .btn-group { justify-content: center; }
+            .cta-section .btn-primary { margin-top: 24px; }
         }
     </style>
 </head>
@@ -492,10 +513,20 @@
 <main>
     <section class="hero">
         <div class="container hero-grid">
-            <div class="hero-content fade-up"><div class="hero-badge">БЕСПЛАТНЫЕ КУРСЫ С 10 УРОКАМИ</div>
-            <h1>Твоё преображение начинается здесь</h1><p>3 авторских курса, каждый — 10 живых уроков. Отмечай прогресс, пей воду и худей с нами!</p>
-            <div class="btn-group"><a href="#courses" class="btn-primary">Выбрать курс <i class="fas fa-arrow-right"></i></a><a href="#signupBlock" class="btn-secondary">Получить гайд</a></div></div>
-            <div class="hero-stats fade-up"><div><div class="stat-number">15K+</div><div>учеников</div></div><div><div class="stat-number">30</div><div>уроков</div></div><div><div class="stat-number">100%</div><div>бесплатно</div></div></div>
+            <div class="hero-content fade-up">
+                <div class="hero-badge">БЕСПЛАТНЫЕ КУРСЫ С 10 УРОКАМИ</div>
+                <h1>Твоё преображение начинается здесь</h1>
+                <p>3 авторских курса, каждый — 10 живых уроков. Отмечай прогресс, пей воду и худей с нами!</p>
+                <div class="btn-group">
+                    <a href="#courses" class="btn-primary">Выбрать курс <i class="fas fa-arrow-right"></i></a>
+                    <a href="#signupBlock" class="btn-secondary">Получить гайд <i class="fas fa-download"></i></a>
+                </div>
+            </div>
+            <div class="hero-stats fade-up">
+                <div><div class="stat-number">15K+</div><div>учеников</div></div>
+                <div><div class="stat-number">30</div><div>уроков</div></div>
+                <div><div class="stat-number">100%</div><div>бесплатно</div></div>
+            </div>
         </div>
     </section>
 
@@ -517,7 +548,7 @@
         </div>
     </div>
 
-    <!-- ИНСТРУМЕНТЫ: КАТЕГОРИИ (ИМТ, ЗАПИСЬ, ВОДА) -->
+    <!-- ИНСТРУМЕНТЫ: КАТЕГОРИИ (ИМТ, ЗАПИСЬ, ВОДА) - ТЕПЕРЬ ВСЁ НА РУССКОМ -->
     <div class="container section-spacing" id="toolsSection">
         <h2 class="section-title fade-up">Инструменты для здорового тела</h2>
         <div class="section-sub fade-up">Контролируй показатели, следи за водным балансом и получи персональную консультацию</div>
@@ -543,16 +574,16 @@
                 <div style="margin-top: 12px; font-size: 0.75rem; color: var(--text-secondary);">Бесплатный звонок — консультация 15 мин</div>
             </div>
 
-            <!-- водный трекер -->
+            <!-- водный трекер на русском (было Water balance) -->
             <div class="tool-card fade-up">
                 <div class="category-badge"><i class="fas fa-tint"></i> Трекер гидратации</div>
-                <h3><i class="fas fa-bottle-water"></i> Water balance</h3>
+                <h3><i class="fas fa-bottle-water"></i> Водный баланс</h3>
                 <div class="water-stats" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; align-items:center;">
                     <div class="water-circle" id="waterCircle">0/8</div>
                     <div style="text-align:center;">
                         <div><span id="glassesCount" style="font-size:1.8rem; font-weight:800;">0</span> / 8 стаканов</div>
                         <button id="addWater" class="btn-primary" style="margin-top:12px;">+1 стакан</button>
-                        <button id="resetWater" class="btn-secondary" style="margin-left:8px;">Сброс</button>
+                        <button id="resetWater" class="btn-secondary" style="margin-left:8px;">Сбросить</button>
                     </div>
                 </div>
                 <div id="waterMessage" style="text-align:center; margin-top:18px;"></div>
@@ -587,7 +618,13 @@
         </div>
     </div>
 
-    <div class="container"><div class="cta-section fade-up"><h2>Начни первый урок прямо сейчас</h2><p>Выбери курс и нажимай на уроки — стройность ждёт!</p><a href="#courses" class="btn-primary">Перейти к курсам →</a></div></div>
+    <div class="container">
+        <div class="cta-section fade-up">
+            <h2>Начни первый урок прямо сейчас</h2>
+            <p>Выбери курс и нажимай на уроки — стройность ждёт!</p>
+            <a href="#courses" class="btn-primary">Перейти к курсам →</a>
+        </div>
+    </div>
 </main>
 
 <footer><div class="container footer-flex"><div><div class="logo">Lean<span>Start</span></div><p>Бесплатные курсы с живыми уроками</p></div><div><p style="font-weight:600;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none;">О проекте</a></p></div><div><p>hello@leanstart.fit</p><div style="display:flex; gap:15px; margin-top:8px;"><i class="fab fa-instagram"></i><i class="fab fa-telegram"></i></div></div></div><div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. 30 уроков для твоего тела.</p></div></footer>
