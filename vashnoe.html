@@ -33,6 +33,7 @@
             --transition: all 0.2s ease;
             --hero-gradient: #fbfdfc;
             --modal-overlay: rgba(0,0,0,0.5);
+            --social-bg: #eef2ef;
         }
 
         body.dark {
@@ -53,6 +54,7 @@
             --donate-bg: #1E2A2A;
             --hero-gradient: #121212;
             --modal-overlay: rgba(0,0,0,0.7);
+            --social-bg: #2a3a34;
         }
 
         body {
@@ -268,9 +270,15 @@
         }
         .slider-controls {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 12px;
             margin-top: 24px;
+        }
+        .slider-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
         }
         .slider-dot {
             width: 8px;
@@ -632,6 +640,33 @@
             flex-wrap: wrap;
             gap: 30px;
         }
+        /* Стили для круглых соцкнопок */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+        .social-circle {
+            width: 48px;
+            height: 48px;
+            background: var(--social-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            color: var(--accent);
+            font-size: 1.4rem;
+            text-decoration: none;
+        }
+        .social-circle:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
         .fade-up {
             opacity: 0;
             transform: translateY(25px);
@@ -654,6 +689,7 @@
             .btn-group { justify-content: center; }
             .cta-section .btn-primary { margin-top: 24px; }
             .reviews-slider { padding: 24px; }
+            .social-circle { width: 42px; height: 42px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -702,7 +738,7 @@
         </div>
     </section>
 
-    <!-- ОТЗЫВЫ КАРУСЕЛЬ + ВСЕ ОТЗЫВЫ -->
+    <!-- КАРУСЕЛЬ ОТЗЫВОВ -->
     <div class="container" id="reviewsSection">
         <h2 class="section-title fade-up">Что говорят наши ученики</h2>
         <div class="section-sub fade-up">Реальные отзывы и впечатления — 60+ человек уже с нами</div>
@@ -713,12 +749,14 @@
                 <div class="review-text" id="reviewText">"Имба-курс! Прошёл нутрициологию за 2 недели, сбросил 5 кг без стресса"</div>
                 <div class="review-name" id="reviewName">Артём, 29 лет</div>
             </div>
-            <div class="slider-controls" id="sliderDots"></div>
-            <button id="allReviewsBtn" class="btn-all-reviews"><i class="fas fa-list-ul"></i> Все отзывы (62)</button>
+            <div class="slider-controls">
+                <div class="slider-dots" id="sliderDots"></div>
+                <button id="allReviewsBtn" class="btn-all-reviews"><i class="fas fa-list-ul"></i> Все отзывы (62)</button>
+            </div>
         </div>
     </div>
 
-    <!-- ИНСТРУМЕНТЫ, ФОРМЫ И Т.Д. (ОСТАЛЬНОЕ БЕЗ ИЗМЕНЕНИЙ) -->
+    <!-- ИНСТРУМЕНТЫ -->
     <div class="container section-spacing" id="toolsSection">
         <h2 class="section-title fade-up">Инструменты для здорового тела</h2>
         <div class="section-sub fade-up">Контролируй показатели, следи за водным балансом и получи персональную консультацию</div>
@@ -791,7 +829,33 @@
     </div>
 </main>
 
-<footer><div class="container footer-flex"><div><div class="logo">Lean<span>Start</span></div><p style="font-size:0.85rem; color:var(--text-secondary);">Бесплатные курсы с живыми уроками</p></div><div><p style="font-weight:500; margin-bottom:8px;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none; font-size:0.85rem;">О проекте</a></p></div><div><p style="font-weight:500;">hello@leanstart.fit</p><div style="display:flex; gap:15px; margin-top:8px;"><i class="fab fa-instagram"></i><i class="fab fa-telegram"></i></div></div></div><div class="container" style="text-align:center; padding-top:30px;"><p style="font-size:0.8rem; color:var(--text-secondary);">© 2026 LeanStart — стройность с умом. 30 уроков для твоего тела.</p></div></footer>
+<!-- ФУТЕР С КРУГЛЫМИ СОЦКНОПКАМИ -->
+<footer>
+    <div class="container footer-flex">
+        <div>
+            <div class="logo">Lean<span>Start</span></div>
+            <p style="font-size:0.85rem; color:var(--text-secondary);">Бесплатные курсы с живыми уроками</p>
+        </div>
+        <div>
+            <p style="font-weight:500; margin-bottom:8px;">Навигация</p>
+            <p><a href="#" style="color:var(--text-secondary); text-decoration:none; font-size:0.85rem;">О проекте</a></p>
+        </div>
+        <div>
+            <p style="font-weight:500;">hello@leanstart.fit</p>
+            <div class="social-links">
+                <a href="https://t.me/ForeLeanStart" target="_blank" class="social-circle" id="tgLink">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <div class="social-circle" id="igLink">
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="text-align:center; padding-top:30px;">
+        <p style="font-size:0.8rem; color:var(--text-secondary);">© 2026 LeanStart — стройность с умом. 30 уроков для твоего тела.</p>
+    </div>
+</footer>
 
 <!-- Модальное окно для всех отзывов -->
 <div id="reviewsModal" class="modal">
@@ -805,7 +869,7 @@
 </div>
 
 <script>
-    // ========== ГЕНЕРАЦИЯ 62 ОТЗЫВОВ (РАЗНООБРАЗНЫЕ, С ИМБА, КРУТО И Т.Д.) ==========
+    // ========== ГЕНЕРАЦИЯ 62 ОТЗЫВОВ ==========
     const names = ["Алина","Дмитрий","Елена","Игорь","Ольга","Сергей","Мария","Антон","Кристина","Павел","Наталья","Роман","Юлия","Владимир","Татьяна","Максим","Анастасия","Евгений","Светлана","Николай","Виктория","Алексей","Дарья","Глеб","Полина","Иван","Ксения","Артём","Валерия","Андрей"];
     const texts = [
         "Имба! Реально рабочий курс 🙌","Круче всех! Сбросила 7 кг за месяц","🔥 Огонь, уже 10 уроков прошёл","Лучшее, что находил в интернете","Наконец-то поняла про КБЖУ","Вода и тренировки — топ, спасибо!","Психология стройности изменила мышление","Имба курс, рекомендую друзьям","Каждый день ждал новый урок","Супер! Виден прогресс после 3 недель","Нравится, что бесплатно и без воды","Самый понятный материал","Жиросжигание дома — бомба 💣","Теперь не срываюсь на сладкое","Удобно, что уроки по 15 минут","Поняла свои ошибки в питании","Мотивация зашкаливает","Имба, наконец-то стройнею без стресса","Реально помогает","Спасибо команде LeanStart!","Курс — зачёт! Хочу ещё","Сделали качественно, с душой","Сбросила 5 кг без диет","Стала пить воду — кожа сияет","Лучший бесплатный проект","Имба для новичков","Упражнения супер простые, но эффект 🔥","Наконец-то полюбила своё тело","Каждый урок открывает глаза","Продолжаю и худею легко","Просто имба","Круто, жду продолжения","Очень мотивирует","Стал меньше есть мусорной еды","Спасибо за дисциплину"
@@ -826,7 +890,6 @@
             stars: rating
         });
     }
-    // перемешаем чуть, чтобы не слишком одинаково
     allReviews.sort(() => Math.random() - 0.5);
     
     let currentIndex = 0;
@@ -850,11 +913,13 @@
         reviewStars.innerHTML = '★'.repeat(r.stars) + '☆'.repeat(5-r.stars);
         reviewText.innerHTML = `"${r.text}"`;
         reviewName.innerHTML = r.name;
-        // активная точка
-        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-            if(i === index) dot.classList.add('active');
+        const dots = document.querySelectorAll('.slider-dot');
+        dots.forEach((dot, i) => {
+            if(i === index % dots.length) dot.classList.add('active');
             else dot.classList.remove('active');
         });
+        const counterSpan = document.querySelector('.review-counter');
+        if(counterSpan) counterSpan.innerHTML = `отзыв ${index+1} из ${allReviews.length}`;
     }
 
     function nextReview() {
@@ -897,7 +962,6 @@
         });
     }
 
-    // пауза при наведении на слайдер
     const sliderContainer = document.getElementById('reviewsSlider');
     sliderContainer.addEventListener('mouseenter', () => { isPaused = true; stopSlider(); });
     sliderContainer.addEventListener('mouseleave', () => { isPaused = false; startSlider(); });
@@ -918,62 +982,31 @@
     closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
 
-    // создание точек (но их много — не будем 60 точек, а просто покажем счетчик)
-    // поставим упрощённо: индикатор прогресса текстовый
-    const dotContainer = document.createElement('div');
-    dotContainer.style.display = 'flex';
-    dotContainer.style.gap = '8px';
-    dotContainer.style.justifyContent = 'center';
-    dotContainer.style.marginTop = '16px';
+    // dots
     for(let i=0;i<Math.min(allReviews.length, 5); i++) {
         let dot = document.createElement('div');
         dot.className = 'slider-dot';
         if(i===0) dot.classList.add('active');
         dot.addEventListener('click', () => {
             if(!isModalOpen) {
-                currentIndex = i;
+                currentIndex = i % allReviews.length;
                 updateReview(currentIndex);
                 if(intervalId) { stopSlider(); startSlider(); }
             }
         });
-        dotContainer.appendChild(dot);
+        sliderDots.appendChild(dot);
     }
-    // добавим текстовый счётчик
     const counterSpan = document.createElement('div');
+    counterSpan.className = 'review-counter';
     counterSpan.style.fontSize = '0.75rem';
     counterSpan.style.color = 'var(--text-secondary)';
-    counterSpan.style.marginTop = '8px';
-    counterSpan.innerHTML = `отзыв ${currentIndex+1} из ${allReviews.length}`;
-    const updateCounter = () => { counterSpan.innerHTML = `отзыв ${currentIndex+1} из ${allReviews.length}`; };
-    const originalUpdate = updateReview;
-    window.updateReview = function(idx) {
-        originalUpdate(idx);
-        updateCounter();
-    };
-    updateReview = function(idx) {
-        originalUpdate(idx);
-        updateCounter();
-    };
-    sliderContainer.querySelector('.slider-controls').appendChild(dotContainer);
+    counterSpan.style.marginTop = '6px';
+    counterSpan.innerHTML = `отзыв 1 из ${allReviews.length}`;
     sliderContainer.querySelector('.slider-controls').appendChild(counterSpan);
     updateReview(0);
     startSlider();
-    window.updateReview = updateReview;
-    // переопределить чтобы счетчик обновлялся
-    const oldUpdate = updateReview;
-    updateReview = function(idx) {
-        oldUpdate(idx);
-        counterSpan.innerHTML = `отзыв ${idx+1} из ${allReviews.length}`;
-        // также обновляем точки (упрощенно: только активная смена)
-        const dots = document.querySelectorAll('.slider-dot');
-        dots.forEach((dot, i) => {
-            if(i=== idx % dots.length) dot.classList.add('active');
-            else dot.classList.remove('active');
-        });
-    };
-    updateReview(0);
-    
-    // остальной код курсов и остального функционала (без изменений)
+
+    // КУРСЫ
     const coursesData = [
         { id: "nutrition", name: "🍏 Нутрициология для начинающих", desc: "Узнай, как питаться вкусно и худеть без голодовок", 
           lessons: ["Введение: почему диеты не работают", "КБЖУ — твои главные цифры", "Как читать этикетки", "Режим питания и интервалы", "Вода и метаболизм", "Сахарные ловушки", "Планирование меню на неделю", "Перекусы без вреда", "Как не срываться на праздниках", "Финальный чек-лист"],
@@ -1029,6 +1062,8 @@
         });
     }
     renderCourses();
+
+    // Тема
     const themeBtn = document.getElementById('themeSwitcher');
     const bodyEl = document.body;
     if(localStorage.getItem('theme') === 'dark') bodyEl.classList.add('dark');
@@ -1066,6 +1101,15 @@
     const navLinksDiv = document.getElementById('navLinks');
     mobileToggle?.addEventListener('click',()=>navLinksDiv.classList.toggle('active'));
     document.querySelectorAll('a[href^="#"]').forEach(anchor=>{ anchor.addEventListener('click',function(e){ const hash = this.getAttribute('href'); if(hash==="#") return; const target = document.querySelector(hash); if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); navLinksDiv?.classList.remove('active'); } }); });
+
+    // Обработка Instagram (недоступно)
+    const igCircle = document.getElementById('igLink');
+    if(igCircle) {
+        igCircle.addEventListener('click', () => {
+            alert('📷 Instagram-страница пока недоступна. Следите за обновлениями!');
+        });
+    }
+    // Telegram уже имеет ссылку в href, дополнительно можно ничего не делать
 </script>
 </body>
 </html>
