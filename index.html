@@ -694,6 +694,66 @@
             .reviews-slider { padding: 24px; }
             .social-circle { width: 42px; height: 42px; font-size: 1.2rem; }
         }
+
+        /* ========== КРАСИВАЯ АНИМАЦИЯ НАЖАТИЯ ========== */
+        .btn-primary,
+        .btn-secondary,
+        .btn-outline-light,
+        .theme-toggle,
+        .donate-btn,
+        .toggle-lessons-btn,
+        .btn-all-reviews,
+        .slider-dot,
+        .close-modal,
+        .social-circle,
+        .faq-question,
+        .mobile-toggle,
+        .nav-links a,
+        .btn-icon,
+        .donate-btn,
+        #addWater,
+        #resetWater,
+        #calcBmi,
+        #signupBtn {
+            transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.1), 
+                        opacity 0.1s ease,
+                        background 0.2s ease;
+            transform: scale(1);
+            will-change: transform;
+        }
+
+        .btn-primary:active,
+        .btn-secondary:active,
+        .btn-outline-light:active,
+        .theme-toggle:active,
+        .donate-btn:active,
+        .toggle-lessons-btn:active,
+        .btn-all-reviews:active,
+        .slider-dot:active,
+        .close-modal:active,
+        .social-circle:active,
+        .faq-question:active,
+        .mobile-toggle:active,
+        .nav-links a:active,
+        .btn-icon:active,
+        .donate-btn:active,
+        #addWater:active,
+        #resetWater:active,
+        #calcBmi:active,
+        #signupBtn:active {
+            transform: scale(0.96);
+            opacity: 0.9;
+        }
+
+        .lesson-check:active {
+            transform: scale(1.2);
+        }
+
+        .course-block:active,
+        .tool-card:active {
+            transform: scale(0.99);
+            transition: transform 0.08s;
+        }
     </style>
 </head>
 <body>
