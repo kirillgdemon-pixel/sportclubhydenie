@@ -552,6 +552,10 @@
                 <a href="#donateBlock">Поддержка</a>
                 <a href="#faq">FAQ</a>
                 <button id="themeSwitcher" class="theme-toggle"><i class="fas fa-sun"></i></button>
+                <!-- Блок авторизации Firebase -->
+                <span id="userEmailDisplay" style="font-size:0.85rem; font-weight:500; color:var(--accent); margin-left:8px;"></span>
+                <button id="firebaseLoginBtn" class="btn-outline-light" style="padding:6px 16px;">Войти</button>
+                <button id="firebaseLogoutBtn" class="btn-outline-light" style="padding:6px 16px; display:none;">Выйти</button>
                 <a href="#signupBlock" class="btn-outline-light">Запись</a>
             </div>
         </div>
@@ -815,6 +819,66 @@
 
 <div id="reviewsModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-comments"></i> Все отзывы (62)</h3><button class="close-modal" id="closeModalBtn">&times;</button></div><div id="allReviewsList" class="all-reviews-grid"></div></div></div>
 
+<!-- FIREBASE МОДУЛЬНАЯ ВЕРСИЯ (твои ключи) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCmYemtFzjNohvg6LxEcQ1Wqa7Xh2Vc4co",
+    authDomain: "lastleave-2c011.firebaseapp.com",
+    projectId: "lastleave-2c011",
+    storageBucket: "lastleave-2c011.firebasestorage.app",
+    messagingSenderId: "776645982162",
+    appId: "1:776645982162:web:7edc0883f3927719223a0b",
+    measurementId: "G-FLYXKFDZV0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const loginBtn = document.getElementById('firebaseLoginBtn');
+  const logoutBtn = document.getElementById('firebaseLogoutBtn');
+  const userEmailSpan = document.getElementById('userEmailDisplay');
+
+  function updateUI(user) {
+    if (user) {
+      userEmailSpan.innerText = user.email;
+      loginBtn.style.display = 'none';
+      logoutBtn.style.display = 'inline-block';
+    } else {
+      userEmailSpan.innerText = '';
+      loginBtn.style.display = 'inline-block';
+      logoutBtn.style.display = 'none';
+    }
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    updateUI(user);
+  });
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+      signInWithPopup(auth, provider).catch(error => {
+        console.error("Ошибка входа:", error);
+        alert("Не удалось войти: " + error.message);
+      });
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth).catch(error => {
+        console.error("Ошибка выхода:", error);
+      });
+    });
+  }
+</script>
+
+<!-- ОСНОВНОЙ СКРИПТ (весь функционал сайта) -->
 <script>
     // -------------------- КУРСЫ (круглый прогресс) --------------------
     const coursesData = [
@@ -957,11 +1021,13 @@
     function stopSlider(){ if(intervalId){ clearInterval(intervalId); intervalId=null; } }
     function renderAllReviewsModal(){ allReviewsList.innerHTML=''; allReviews.forEach(rev=>{ const div=document.createElement('div'); div.className='review-item'; div.innerHTML=`<div style="display:flex; gap:12px;"><div style="background:var(--accent-soft); width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;">${rev.avatar}</div><div><strong>${rev.name}</strong></div></div><div class="review-stars">${'★'.repeat(rev.stars)}${'☆'.repeat(5-rev.stars)}</div><div class="review-text">"${rev.text}"</div>`; allReviewsList.appendChild(div); }); }
     const sliderContainer=document.getElementById('reviewsSlider');
-    sliderContainer.addEventListener('mouseenter',()=>{ isPaused=true; stopSlider(); });
-    sliderContainer.addEventListener('mouseleave',()=>{ isPaused=false; startSlider(); });
-    allReviewsBtn.addEventListener('click',()=>{ if(isModalOpen) return; isModalOpen=true; stopSlider(); renderAllReviewsModal(); modal.classList.add('active'); });
-    closeModalBtn.addEventListener('click',()=>{ modal.classList.remove('active'); isModalOpen=false; startSlider(); });
-    modal.addEventListener('click',(e)=>{ if(e.target===modal){ modal.classList.remove('active'); isModalOpen=false; startSlider(); } });
+    if(sliderContainer) {
+        sliderContainer.addEventListener('mouseenter',()=>{ isPaused=true; stopSlider(); });
+        sliderContainer.addEventListener('mouseleave',()=>{ isPaused=false; startSlider(); });
+    }
+    if(allReviewsBtn) allReviewsBtn.addEventListener('click',()=>{ if(isModalOpen) return; isModalOpen=true; stopSlider(); renderAllReviewsModal(); modal.classList.add('active'); });
+    if(closeModalBtn) closeModalBtn.addEventListener('click',()=>{ modal.classList.remove('active'); isModalOpen=false; startSlider(); });
+    if(modal) modal.addEventListener('click',(e)=>{ if(e.target===modal){ modal.classList.remove('active'); isModalOpen=false; startSlider(); } });
     for(let i=0;i<5;i++){ let dot=document.createElement('div'); dot.className='slider-dot'; if(i===0) dot.classList.add('active'); dot.addEventListener('click',()=>{ if(!isModalOpen){ currentIndex=i%allReviews.length; updateReview(currentIndex); if(intervalId){ stopSlider(); startSlider(); } } }); sliderDots.appendChild(dot); }
     const counterSpan=document.createElement('div'); counterSpan.className='review-counter'; counterSpan.style.cssText='font-size:0.75rem;color:var(--text-secondary);margin-top:6px;'; counterSpan.innerHTML=`отзыв 1 из ${allReviews.length}`; sliderContainer.querySelector('.slider-controls').appendChild(counterSpan);
     updateReview(0); startSlider();
@@ -993,15 +1059,12 @@
     }
 
     // -------------------- СПИСОК ПОКУПОК (localStorage) --------------------
-    let shoppingItems = []; // { id, text, checked }
+    let shoppingItems = [];
 
     function loadShoppingList() {
         const saved = localStorage.getItem('leanstart_shopping');
-        if (saved) {
-            shoppingItems = JSON.parse(saved);
-        } else {
-            shoppingItems = [];
-        }
+        if (saved) shoppingItems = JSON.parse(saved);
+        else shoppingItems = [];
         renderShoppingList();
     }
 
@@ -1029,7 +1092,6 @@
             `;
             container.appendChild(div);
         });
-        // Добавляем обработчики
         document.querySelectorAll('.shopping-item-check').forEach(cb => {
             cb.addEventListener('change', (e) => {
                 const id = cb.getAttribute('data-id');
@@ -1053,11 +1115,7 @@
 
     function addShoppingItem(text) {
         if (!text.trim()) return;
-        const newItem = {
-            id: Date.now() + Math.random(),
-            text: text.trim(),
-            checked: false
-        };
+        const newItem = { id: Date.now() + Math.random(), text: text.trim(), checked: false };
         shoppingItems.push(newItem);
         saveShoppingList();
         renderShoppingList();
@@ -1117,7 +1175,7 @@
             updateIconTheme();
             updateWaterUI();
             redrawAllProgressCircles();
-            renderShoppingList(); // перерисуем список, чтобы обновились цвета
+            renderShoppingList();
         });
         document.getElementById('calcBmi')?.addEventListener('click', () => { const h = parseFloat(document.getElementById('height').value), w = parseFloat(document.getElementById('weight').value), resDiv = document.getElementById('bmiResult'); if(!h || !w || h<=0 || w<=0) { resDiv.innerHTML = '❌ Введите корректные данные'; return; } const bmi = w / ((h/100)**2); let cat = bmi<18.5?'Дефицит массы':bmi<25?'Норма ✅':bmi<30?'Избыточный вес':'Ожирение ⚠️'; resDiv.innerHTML = `ИМТ: ${bmi.toFixed(1)} — ${cat}`; });
         document.getElementById('signupBtn')?.addEventListener('click', () => { const code = document.getElementById('countryCode').value, phone = document.getElementById('phoneNumber').value.trim(); if(!phone) alert('Введите номер'); else alert(`📞 Тестовый режим: заявка на ${code} ${phone} принята.`); });
@@ -1140,7 +1198,6 @@
             document.getElementById('kcalResult').innerHTML = `🔥 ${kcal.toFixed(0)} ккал<br><span style="font-size:0.8rem;">Б:${protein}г Ж:${fat}г У:${carbs}г</span>`;
         });
 
-        // События для списка покупок
         document.getElementById('addShoppingItemBtn')?.addEventListener('click', () => {
             const input = document.getElementById('newItemInput');
             if (input.value.trim()) {
