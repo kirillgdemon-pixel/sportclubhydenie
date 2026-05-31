@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>LeanStart | Круглый прогресс, статьи, рецепты</title>
+    <title>LeanStart | Круглый прогресс, статьи, рецепты + список покупок</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -391,6 +391,99 @@
             padding-left: 20px;
         }
 
+        /* СПИСОК ПОКУПОК */
+        .shopping-list-card {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border-light);
+            padding: 32px;
+            box-shadow: var(--card-shadow);
+            margin-top: 40px;
+        }
+        .shopping-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+        .shopping-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .add-item-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .add-item-form input {
+            flex: 2;
+            padding: 12px 18px;
+            border-radius: 60px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-page);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .shopping-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .shopping-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: var(--accent-soft);
+            border-radius: 60px;
+            transition: 0.1s;
+        }
+        .shopping-item-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+        }
+        .shopping-item-check {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+        .shopping-item-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .shopping-item-text.checked {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .delete-item {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px 8px;
+            transition: 0.1s;
+        }
+        .delete-item:hover { color: var(--danger); }
+        .shopping-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
         .faq-item { border-bottom: 1px solid var(--border-light); padding: 18px 0; }
         .faq-question { font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s; color: var(--text-secondary); font-size: 0.9rem; }
@@ -419,11 +512,13 @@
             .mobile-toggle { display: block; }
             .hero-content h1 { font-size: 2.2rem; }
             .tools-grid, .articles-grid, .recipes-grid { flex-direction: column; gap: 30px; }
+            .shopping-header { flex-direction: column; align-items: flex-start; }
         }
         /* анимация нажатия */
         .btn-primary, .btn-secondary, .btn-outline-light, .theme-toggle, .donate-btn, .toggle-lessons-btn,
         .btn-all-reviews, .slider-dot, .close-modal, .social-circle, .faq-question, .mobile-toggle, .nav-links a,
-        #addWater, #resetWater, #calcBmi, #signupBtn, #calcKcalBtn, .read-more, .cook-btn {
+        #addWater, #resetWater, #calcBmi, #signupBtn, #calcKcalBtn, .read-more, .cook-btn, .delete-item,
+        #addShoppingItemBtn, #clearPurchasedBtn {
             transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.1s ease;
             transform: scale(1);
         }
@@ -431,7 +526,8 @@
         .donate-btn:active, .toggle-lessons-btn:active, .btn-all-reviews:active, .slider-dot:active,
         .close-modal:active, .social-circle:active, .faq-question:active, .mobile-toggle:active,
         .nav-links a:active, #addWater:active, #resetWater:active, #calcBmi:active, #signupBtn:active,
-        #calcKcalBtn:active, .read-more:active, .cook-btn:active {
+        #calcKcalBtn:active, .read-more:active, .cook-btn:active, .delete-item:active,
+        #addShoppingItemBtn:active, #clearPurchasedBtn:active {
             transform: scale(0.96);
             opacity: 0.9;
         }
@@ -452,6 +548,7 @@
                 <a href="#toolsSection">Инструменты</a>
                 <a href="#articlesSection">Статьи</a>
                 <a href="#recipesSection">Рецепты</a>
+                <a href="#shoppingSection">Список</a>
                 <a href="#donateBlock">Поддержка</a>
                 <a href="#faq">FAQ</a>
                 <button id="themeSwitcher" class="theme-toggle"><i class="fas fa-sun"></i></button>
@@ -632,7 +729,6 @@
                 </div>
             </div>
             <div class="recipe-card fade-up">
-                <!-- НОВАЯ ФОТОГРАФИЯ РЫБЫ (ПО ССЫЛКЕ ПОЛЬЗОВАТЕЛЯ) -->
                 <img class="recipe-img" src="https://thf.bing.com/th/id/OIP.4A7X6g0yvl2eSNA5uthb1AHaHH?w=180&h=180&c=7&r=0&o=7&cb=thfc1falcon&dpr=1.3&pid=1.7&rm=3" alt="Запечённая рыба" loading="lazy">
                 <div class="recipe-content">
                     <h4>🐟 Запечённая рыба с овощами</h4>
@@ -646,7 +742,6 @@
                 </div>
             </div>
             <div class="recipe-card fade-up">
-                <!-- НОВАЯ ФОТОГРАФИЯ ДЕСЕРТА (ПО ССЫЛКЕ ПОЛЬЗОВАТЕЛЯ) -->
                 <img class="recipe-img" src="https://thf.bing.com/th/id/OIP.vnrqSPMoVprSlNMI0I5fLAHaE5?w=272&h=180&c=7&r=0&o=7&cb=thfc1falcon&dpr=1.3&pid=1.7&rm=3" alt="Творожный десерт" loading="lazy">
                 <div class="recipe-content">
                     <h4>🍓 Творожный десерт без сахара</h4>
@@ -658,6 +753,23 @@
                     <ul><li>Творог 5% — 150 г</li><li>Натуральный йогурт — 2 ст. ложки</li><li>Ягоды (клубника/черника) — 50 г</li><li>Ванилин, стевия (по желанию)</li></ul>
                     <p><strong>Приготовление:</strong> Смешайте творог с йогуртом до кремообразного состояния. Добавьте ягоды и перемешайте. При желании подсластите стевией.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СПИСОК ПОКУПОК -->
+    <div class="container section-spacing" id="shoppingSection">
+        <div class="shopping-list-card fade-up">
+            <div class="shopping-header">
+                <h3><i class="fas fa-shopping-basket"></i> Список покупок</h3>
+                <button id="clearPurchasedBtn" class="btn-secondary btn-sm" style="padding: 6px 16px;">Очистить купленные</button>
+            </div>
+            <div class="add-item-form">
+                <input type="text" id="newItemInput" placeholder="Например: яйца, овсянка, помидоры...">
+                <button id="addShoppingItemBtn" class="btn-primary">➕ Добавить</button>
+            </div>
+            <div id="shoppingItemsList" class="shopping-items">
+                <!-- динамически загружаемые позиции -->
             </div>
         </div>
     </div>
@@ -698,7 +810,7 @@
         <div><p style="font-weight:500;">Навигация</p><p><a href="#" style="color:var(--text-secondary); text-decoration:none;">О проекте</a></p></div>
         <div><p style="font-weight:500;">hello@leanstart.fit</p><div class="social-links"><a href="https://t.me/ForeLeanStart" target="_blank" class="social-circle"><i class="fab fa-telegram"></i></a><div class="social-circle" id="igLink"><i class="fab fa-instagram"></i></div></div></div>
     </div>
-    <div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. Круглый прогресс, статьи и рецепты.</p></div>
+    <div class="container" style="text-align:center; padding-top:30px;"><p>© 2026 LeanStart — стройность с умом. Круглый прогресс, статьи, рецепты и список покупок.</p></div>
 </footer>
 
 <div id="reviewsModal" class="modal"><div class="modal-content"><div class="modal-header"><h3><i class="fas fa-comments"></i> Все отзывы (62)</h3><button class="close-modal" id="closeModalBtn">&times;</button></div><div id="allReviewsList" class="all-reviews-grid"></div></div></div>
@@ -856,7 +968,6 @@
 
     // -------------------- РАСКРЫТИЕ СТАТЕЙ И РЕЦЕПТОВ --------------------
     function initArticlesAndRecipes() {
-        // Статьи
         document.querySelectorAll('.read-more').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -868,7 +979,6 @@
                 }
             });
         });
-        // Рецепты
         document.querySelectorAll('.cook-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -882,10 +992,98 @@
         });
     }
 
+    // -------------------- СПИСОК ПОКУПОК (localStorage) --------------------
+    let shoppingItems = []; // { id, text, checked }
+
+    function loadShoppingList() {
+        const saved = localStorage.getItem('leanstart_shopping');
+        if (saved) {
+            shoppingItems = JSON.parse(saved);
+        } else {
+            shoppingItems = [];
+        }
+        renderShoppingList();
+    }
+
+    function saveShoppingList() {
+        localStorage.setItem('leanstart_shopping', JSON.stringify(shoppingItems));
+    }
+
+    function renderShoppingList() {
+        const container = document.getElementById('shoppingItemsList');
+        if (!container) return;
+        if (shoppingItems.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-secondary);">Список пуст. Добавьте продукты ☝️</div>';
+            return;
+        }
+        container.innerHTML = '';
+        shoppingItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'shopping-item';
+            div.innerHTML = `
+                <div class="shopping-item-left">
+                    <input type="checkbox" class="shopping-item-check" data-id="${item.id}" ${item.checked ? 'checked' : ''}>
+                    <span class="shopping-item-text ${item.checked ? 'checked' : ''}">${escapeHtml(item.text)}</span>
+                </div>
+                <button class="delete-item" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+            `;
+            container.appendChild(div);
+        });
+        // Добавляем обработчики
+        document.querySelectorAll('.shopping-item-check').forEach(cb => {
+            cb.addEventListener('change', (e) => {
+                const id = cb.getAttribute('data-id');
+                const item = shoppingItems.find(i => i.id == id);
+                if (item) {
+                    item.checked = cb.checked;
+                    saveShoppingList();
+                    renderShoppingList();
+                }
+            });
+        });
+        document.querySelectorAll('.delete-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                shoppingItems = shoppingItems.filter(i => i.id != id);
+                saveShoppingList();
+                renderShoppingList();
+            });
+        });
+    }
+
+    function addShoppingItem(text) {
+        if (!text.trim()) return;
+        const newItem = {
+            id: Date.now() + Math.random(),
+            text: text.trim(),
+            checked: false
+        };
+        shoppingItems.push(newItem);
+        saveShoppingList();
+        renderShoppingList();
+    }
+
+    function clearPurchased() {
+        shoppingItems = shoppingItems.filter(item => !item.checked);
+        saveShoppingList();
+        renderShoppingList();
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
     // -------------------- ОБЩАЯ ИНИЦИАЛИЗАЦИЯ --------------------
     window.addEventListener('load', () => {
         renderCourses();
         initArticlesAndRecipes();
+        loadShoppingList();
 
         // Тема
         const themeBtn = document.getElementById('themeSwitcher');
@@ -919,6 +1117,7 @@
             updateIconTheme();
             updateWaterUI();
             redrawAllProgressCircles();
+            renderShoppingList(); // перерисуем список, чтобы обновились цвета
         });
         document.getElementById('calcBmi')?.addEventListener('click', () => { const h = parseFloat(document.getElementById('height').value), w = parseFloat(document.getElementById('weight').value), resDiv = document.getElementById('bmiResult'); if(!h || !w || h<=0 || w<=0) { resDiv.innerHTML = '❌ Введите корректные данные'; return; } const bmi = w / ((h/100)**2); let cat = bmi<18.5?'Дефицит массы':bmi<25?'Норма ✅':bmi<30?'Избыточный вес':'Ожирение ⚠️'; resDiv.innerHTML = `ИМТ: ${bmi.toFixed(1)} — ${cat}`; });
         document.getElementById('signupBtn')?.addEventListener('click', () => { const code = document.getElementById('countryCode').value, phone = document.getElementById('phoneNumber').value.trim(); if(!phone) alert('Введите номер'); else alert(`📞 Тестовый режим: заявка на ${code} ${phone} принята.`); });
@@ -940,6 +1139,21 @@
             const kcal = protein * 4 + fat * 9 + carbs * 4;
             document.getElementById('kcalResult').innerHTML = `🔥 ${kcal.toFixed(0)} ккал<br><span style="font-size:0.8rem;">Б:${protein}г Ж:${fat}г У:${carbs}г</span>`;
         });
+
+        // События для списка покупок
+        document.getElementById('addShoppingItemBtn')?.addEventListener('click', () => {
+            const input = document.getElementById('newItemInput');
+            if (input.value.trim()) {
+                addShoppingItem(input.value);
+                input.value = '';
+            }
+        });
+        document.getElementById('newItemInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('addShoppingItemBtn').click();
+            }
+        });
+        document.getElementById('clearPurchasedBtn')?.addEventListener('click', clearPurchased);
     });
 </script>
 </body>
